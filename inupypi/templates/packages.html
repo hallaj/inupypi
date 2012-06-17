@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}inetutils PyPI{% endblock %}
+{% block content %}
+<h1>Packages for {{ name }}</h1>
+<div class="rows">
+    <span class="header">Filename</span>
+    <span class="header">Metadata</span>
+</div>
+
+<div class="clear"></div>
+
+{% for package in packages %}
+<div class="rows">
+    <span class="item">
+        <a href="{{ url_for('package_get', package=package.name, filename=package.filename) }}">{{ package.filename }}</a>
+    </span>
+    <span class="item">
+        <a href="{{ url_for('package_metadata', package=package.name, filename=package.filename) }}">Package Metadata</a>
+    </span>
+</div>
+
+<div class="clear"></div>
+{% endfor %}
+
+<div class="rows">
+    <a href="{{ url_for('index') }}">Back to Index</a>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}inetutils PyPI{% endblock %}
+{% block content %}
+<h1>Package Metadata for {{ filename }}</h1>
+
+<div class="clear"></div>
+
+{% if info %}
+
+<div class="rows">
+    <span class="header">Filename</span>
+    <span class="header">Version</span>
+    <span class="header">Author</span>
+    <span class="header">License</span>
+</div>
+
+<div class="clear"></div>
+
+<div class="rows">
+    <span class="item">{{ info.Name }}</span>
+    <span class="item">{{ info.Version }}</span>
+    <span class="item">{{ info.Author }}</span>
+    <span class="item">{{ info.License }}</span>
+</div>
+
+<div class="clear"></div>
+
+<h4>Package Description</h4>
+<div class="rows">
+    <pre>{{ info.Description }}</pre>
+</div>
+
+<div class="clear"></div>
+{% endif %}
+
+<div class="rows">
+    <a href="{{ url_for('package', package=info.Name) }}">Back to {{ info.Name }}</a>
+</div>
+{% endblock %}
