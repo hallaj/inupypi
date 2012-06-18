@@ -6,6 +6,7 @@ import os
 from inupypi import app, render_template, send_from_directory
 from inupypi import Response
 from inupypi.components.packages import Packages, PackageInfo
+from inupypi.components.updater import Updater
 from inupypi.settings import PACKAGE_PATH
 
 
@@ -37,3 +38,8 @@ def package_metadata(package, filename):
         package), filename=filename).pkg_info
     return render_template('metadata.html', info=package_info,
             filename=filename)
+
+
+@app.route('/check_update/<package>/')
+def check_update(package):
+    return Updater().get_releases(package)

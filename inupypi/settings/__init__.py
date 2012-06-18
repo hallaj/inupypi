@@ -3,10 +3,13 @@
 
 import os
 
-# STATIC DIR
+# APPLICATION STATIC DIR
 HERE = os.path.realpath(os.path.dirname(__file__))
 PACKAGE_PATH = os.path.realpath(os.path.join(HERE, '..', 'packages'))
 DATABASE_PATH = os.path.realpath(os.path.join(HERE, '..', 'db'))
+
+# REMOTE PYPI SERVER
+REMOTE_PYPI = 'http://pypi.python.org/pypi/'
 
 # Flask
 DEBUG = True

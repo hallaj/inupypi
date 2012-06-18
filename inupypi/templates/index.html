@@ -6,6 +6,7 @@
     <div class="rows">
         <span class="header">Package Name</span>
         <span class="header">Latest Local Version</span>
+        <span class="header">Latest Remote Version</span>
     </div>
 
     <div class="clear"></div>
@@ -14,6 +15,7 @@
     <div class="rows">
         <span class="item"><a href="{{ url_for('package', package=package.name) }}">{{ package.name }}</a></span>
         <span class="item">{% if package.local_version %}<a href="{{ url_for('package_get', package=package.name, filename=package.local_version) }}">{{ package.local_version }}</a>{% endif %}</span>
+        <span class="item" id="update-{{ package.name }}"><a href="javascript:check_update('{{ url_for('check_update', package=package.name) }}', 'update-{{ package.name }}')">Check for update</a></span>
     </div>
 
     <div class="clear"></div>
