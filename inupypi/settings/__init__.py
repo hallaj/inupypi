@@ -1,8 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-from os import path
+import os
 
+# STATIC DIR
+HERE = os.path.realpath(os.path.dirname(__file__))
+PACKAGE_PATH = os.path.realpath(os.path.join(HERE, '..', 'packages'))
+DATABASE_PATH = os.path.realpath(os.path.join(HERE, '..', 'db'))
+
+# Flask
 DEBUG = True
-PACKAGE_PATH = path.realpath(path.join(
-    path.dirname(__file__), '..', 'packages'))
+
+# SQLAlchemy
+SQLALCHEMY_DATABASE_URI = 'sqlite://%s/db.sqlite' % DATABASE_PATH
+SQLALCHEMY_ECHO = DEBUG
