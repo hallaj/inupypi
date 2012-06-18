@@ -4,7 +4,6 @@
 import os
 
 from inupypi.settings import PACKAGE_PATH
-#from inupypi.components.updater import get_release
 from pkgtools.pkg import get_metadata
 
 
@@ -15,7 +14,6 @@ class PackageInfo(object):
         self.release_version = ''
         self.filename = kwargs.get('filename')
         self.size = kwargs.get('size')
-        self.size = kwargs.get('updated')
 
         if kwargs.get('package_path'):
             self.pkg_info = get_metadata(str(os.path.join(
