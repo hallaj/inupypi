@@ -21,17 +21,20 @@ class PackageInfo(object):
 
 
 class Packages(object):
+    def __init__(self):
+        self.package_dir = PACKAGE_PATH
+
     def get_folders(self):
         folders = []
 
-        for package in os.listdir(PACKAGE_PATH):
-            if os.path.isdir(os.path.join(PACKAGE_PATH, package)):
+        for package in os.listdir(self.package_dir):
+            if os.path.isdir(os.path.join(self.package_dir, package)):
                 folders.append(PackageInfo(name=package,
                     version=self.get_latest(package)))
         return folders
 
     def get_latest(self, package):
-        package_contents = os.listdir(os.path.join(PACKAGE_PATH, package))
+        package_contents = os.listdir(os.path.join(self.package_dir, package))
         package_contents.sort()
 
         try:
@@ -42,10 +45,10 @@ class Packages(object):
     def get_packages(self, package):
         packages = []
 
-        files = os.listdir(os.path.join(PACKAGE_PATH, package))
+        files = os.listdir(os.path.join(self.package_dir, package))
         files.sort(reverse=True)
 
         for f in files:
             packages.append(PackageInfo(name=package, filename=f,
-                package_path=os.path.join(PACKAGE_PATH, package)))
+                package_path=os.path.join(self.package_dir, package)))
         return packages
