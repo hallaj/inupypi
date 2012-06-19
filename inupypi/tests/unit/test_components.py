@@ -31,7 +31,20 @@ class TestComponents(TestCase):
         folders = packages.get_folders()
         assert len(folders) == 1, "package_incorrect.txt should not be listed"
 
+    def test_get_latest(self):
 
+        '''Verify that get_latest works'''
+
+        package_dir = PACKAGE_PATH = TempIO() + '/packages'
+        os.makedirs(package_dir)
+        os.makedirs(package_dir+'/package_one')
+        for version in range(1,10):
+            open(package_dir+'/package_one/package-%s.txt' %version,'w').close()
+
+        packages = Packages()
+        packages.package_dir = package_dir
+        versions = packages.get_latest('package_one')
+        assert versions == 'package-9.txt'
 
 
 
