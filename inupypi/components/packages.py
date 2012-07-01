@@ -1,54 +1,39 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-import os
+from inupypi import app
+from unipath import Path
 
-from inupypi.settings import PACKAGE_PATH
-from pkgtools.pkg import get_metadata
+def get_packages():
+    pkg_path = Path(app.config.get('PKG_PATH'))
+    packages = []
 
+    for package in (pkg_path.listdir() if pkg_path.isdir() else []):
+        if package.isdir():
+            packages.append(package)
+    packages.sort()
+    return packages
 
-class PackageInfo(object):
-    def __init__(self, **kwargs):
-        self.name = kwargs.get('name')
-        self.local_version = kwargs.get('version')
-        self.release_version = ''
-        self.filename = kwargs.get('filename')
-        self.size = kwargs.get('size')
+def get_package_files(package):
+    pkg_path = Path(app.config.get('PKG_PATH'), package)
+    files = []
 
-        if kwargs.get('package_path'):
-            self.pkg_info = get_metadata(str(os.path.join(
-                kwargs.get('package_path'), kwargs.get('filename')))).pkg_info
+    for f in (pkg_path.listdir() if pkg_path.isdir() else []):
+        files.append(f)
+    files.sort(reverse=True)
+    return files
 
+def get_file(package, filename):
+    package = Path(app.config.get('PKG_PATH', ''), package, filename)
 
-class Packages(object):
-    def __init__(self):
-        self.package_dir = PACKAGE_PATH
+    if package.exists() and package.isfile():
+        return package
+    return False
 
-    def get_folders(self):
-        folders = []
+def get_latest_file(package):
+    packages = get_package_files(package)
 
-        for package in os.listdir(self.package_dir):
-            if os.path.isdir(os.path.join(self.package_dir, package)):
-                folders.append(PackageInfo(name=package,
-                    version=self.get_latest(package)))
-        return folders
-
-    def get_latest(self, package):
-        package_contents = os.listdir(os.path.join(self.package_dir, package))
-        package_contents.sort()
-
-        try:
-            return package_contents[-1:][0]
-        except IndexError:
-            return False
-
-    def get_packages(self, package):
-        packages = []
-
-        files = os.listdir(os.path.join(self.package_dir, package))
-        files.sort(reverse=True)
-
-        for f in files:
-            packages.append(PackageInfo(name=package, filename=f,
-                package_path=os.path.join(self.package_dir, package)))
-        return packages
+    try:
+        return Path(packages[0]).name
+    except IndexError:
+        return False

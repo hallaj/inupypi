@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}inetutils PyPI{% endblock %}
+{% block content %}
+
+{% if packages %}
+<h1>Available Packages</h1>
+    <div class="rows">
+        <span class="header">Name</span>
+    </div>
+
+    <div class="clear"></div>
+
+    {% for p in packages %}
+    <div class="rows">
+        <span class="item">
+            <a href="{{ url_for('package', name=p.name) }}">{{ p.name }}</a>
+        </span>
+    </div>
+
+    <div class="clear"></div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

@@ -3,43 +3,36 @@
 
 import os
 
-from inupypi import app, render_template, send_from_directory
-from inupypi import Response
-from inupypi.components.packages import Packages, PackageInfo
-from inupypi.components.updater import Updater
-from inupypi.settings import PACKAGE_PATH
+from inupypi import abort, app, render_template, send_from_directory
+from inupypi.components.packages import get_file, get_latest_file, \
+        get_packages, get_package_files
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', packages=Packages().get_folders())
+    return render_template('index.html', packages=get_packages())
 
 
-@app.route('/<pkg>/')
-def fetch_package(pkg):
-    return package(pkg)
+@app.route('/<name>/')
+def fetch_package(name):
+    return package(name)
 
 
-@app.route('/package/<package>/')
-def package(package):
-    return render_template('packages.html', name=package,
-            packages=Packages().get_packages(package))
+@app.route('/package/<name>/')
+def package(name):
+    return render_template('package.html', files=get_package_files(name))
 
 
-@app.route('/package/<package>/get/<filename>')
-def package_get(package, filename):
-    return send_from_directory(os.path.join(PACKAGE_PATH, package), filename,
-            as_attachment=True)
+@app.route('/package/<name>/get/<filename>')
+def get_package(name, filename):
+    package = get_file(name, filename)
 
-
-@app.route('/package/<package>/metadata/<filename>')
-def package_metadata(package, filename):
-    package_info = PackageInfo(package_path=os.path.join(PACKAGE_PATH,
-        package), filename=filename).pkg_info
-    return render_template('metadata.html', info=package_info,
-            filename=filename)
-
-
-@app.route('/check_update/<package>/')
-def check_update(package):
-    return Updater().get_releases(package)
+    if package:
+        return send_from_directory(package.parent, package.name,
+                as_attachment=True)
+    abort(404)

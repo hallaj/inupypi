@@ -1,4 +1,4 @@
-body {color:#111;font-family:'Verdana',sans-serif;font-size:9pt;}
+html,body {color:#333;font-family:'Lucida Grande','Lucida Sans Unicode','Verdana',sans-serif;font-size:9pt;}
 h1, h2, h3, h4 {font-family:'Andale Mono',monospace;font-size:18pt;text-shadow:1px 1px 1px #333;}
 a, a:active, a:link {color:#00008b;text-decoration:none;}
 
@@ -10,5 +10,5 @@ a, a:active, a:link {color:#00008b;text-decoration:none;}
 
 .clear {clear:both;}
 .rows {padding:5px 0 0 0;}
-.rows .header {display:block;float:left;font-weight:bold;padding:0 10px 0 10px;width:150px;}
+.rows .header {border-bottom:1px solid #ccc;display:block;float:left;font-weight:bold;padding:0 10px 10px 10px;width:150px;}
 .rows .item {border-bottom:1px solid #ccc;display:block;float:left;padding:10px;text-align:left;width:150px;height:20px;}
