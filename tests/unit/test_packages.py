@@ -40,10 +40,15 @@ class Test_Packages(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.workspace)
 
-    def test_get_folders(self):
+    def test_get_packages(self):
         assert get_packages() == []
+
         self.create_packages()
+        package_file = Path(self.workspace, 'some_file')
+        package_file.write_file(package_file)
+
         assert get_packages() == self.packages
+        assert package_file not in get_packages()
 
     def test_get_package_files(self):
         for package in self.packages:
