@@ -55,7 +55,9 @@ class Test_Inupypi(unittest.TestCase):
         for package in self.packages:
             assert package.name in self.app.get('/').data
 
-        assert get_packages() == self.packages
+        get_packages_items = [p.package for p in get_packages()]
+
+        assert get_packages_items == self.packages
 
     def test_get_package_files(self):
         for package in self.packages:

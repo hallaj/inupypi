@@ -4,15 +4,22 @@
 from inupypi import app
 from unipath import Path
 
+class PackageInfo(object):
+    package = ''
+    release = ''
+
+
 def get_packages():
     pkg_path = Path(app.config.get('PKG_PATH'))
     packages = []
 
     for package in (pkg_path.listdir() if pkg_path.isdir() else []):
         if package.isdir():
-            packages.append(package)
-    packages.sort()
-    return packages
+            p = PackageInfo()
+            p.package = package
+            p.release = get_latest_file(package)
+            packages.append(p)
+    return sorted(packages, key=lambda packageinfo: packageinfo.package)
 
 def get_package_files(package):
     pkg_path = Path(app.config.get('PKG_PATH'), package)

@@ -6,6 +6,7 @@
 <h1>Available Packages</h1>
     <div class="rows">
         <span class="header">Name</span>
+        <span class="header">Latest Local Version</span>
     </div>
 
     <div class="clear"></div>
@@ -13,7 +14,11 @@
     {% for p in packages %}
     <div class="rows">
         <span class="item">
-            <a href="{{ url_for('package', name=p.name) }}">{{ p.name }}</a>
+            <a href="{{ url_for('package', name=p.package.name) }}">{{ p.package.name }}</a>
+        </span>
+
+        <span class="item">
+            <a href="{{ url_for('get_package', name=p.package.name, filename=p.release) }}">{{ p.release }}</a>
         </span>
     </div>
 

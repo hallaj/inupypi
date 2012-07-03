@@ -6,8 +6,9 @@ import shutil
 import tempfile
 import unittest
 
-from inupypi.components.packages import get_packages, get_package_files
-from inupypi.components.packages import get_file, get_latest_file
+from inupypi.components.packages import get_packages, get_package_files, \
+        get_file, get_latest_file
+from inupypi.components.packages import PackageInfo
 from unipath import Path
 
 
@@ -47,8 +48,10 @@ class Test_Packages(unittest.TestCase):
         package_file = Path(self.workspace, 'some_file')
         package_file.write_file(package_file)
 
-        assert get_packages() == self.packages
-        assert package_file not in get_packages()
+        get_packages_items = [package.package for package in get_packages()]
+
+        assert get_packages_items == self.packages
+        assert package_file not in get_packages_items
 
     def test_get_package_files(self):
         for package in self.packages:
