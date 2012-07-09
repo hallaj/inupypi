@@ -1,87 +1,74 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-import inupypi
-import shutil
 import tempfile
 import unittest
 
-from inupypi.components.packages import get_packages, get_package_files, \
-        get_file, get_latest_file
-from inupypi.components.packages import PackageInfo
+from inupypi import app
+from inupypi.components.packages import *
+from tests.packages import *
 from unipath import Path
 
 
 class Test_Packages(unittest.TestCase):
-    def create_packages(self):
-        packages = []
-
-        for package in self.packages:
-            package = Path(self.workspace, package)
-            package.mkdir()
-            packages.append(package)
-        self.packages = packages
-
-    def create_package_files(self):
-        for package in self.packages:
-            for f in self.package_files:
-                Path(self.workspace, package).mkdir()
-                Path(self.workspace, package, f).write_file(f)
-
     def setUp(self):
-        self.workspace = tempfile.mkdtemp()
+        self.app = app.test_client()
+        self.workspace = Path(tempfile.mkdtemp())
+        self.packages = ['p1', 'p2', 'p3', 'p4']
+        self.files = ['f1', 'f2', 'f3', 'f4']
+        self.files.sort(reverse=True)
 
-        self.app = inupypi.app.test_client()
-        self.app.application.config['PKG_PATH'] = self.workspace
-
-        self.packages = ['package_a', 'package_b', 'package_c']
-        self.package_files = ['file-1.0', 'file-2.0']
-        self.packages.sort()
+        self.app.application.config['PACKAGE_PATH'] = self.workspace
 
     def tearDown(self):
-        shutil.rmtree(self.workspace)
+        self.workspace.rmtree()
+
+    def test_get_packages_without_packages_folder(self):
+        self.app.application.config['PACKAGE_PATH'] = Path(self.workspace, 'a')
+
+        try:
+            get_packages()
+            return False
+        except:
+            return True
 
     def test_get_packages(self):
         assert get_packages() == []
+        env_create_packages(self.workspace, self.packages)
+        assert get_packages() == self.packages
 
-        self.create_packages()
-        package_file = Path(self.workspace, 'some_file')
-        package_file.write_file(package_file)
+    def test_get_packages_from_folders_only(self):
+        env_create_packages(self.workspace, self.packages)
+        env_create_packages(self.workspace, self.files, files=True)
 
-        get_packages_items = [package.package for package in get_packages()]
+        packages_and_files = [Path(package)
+                for package in self.packages + self.files]
+        packages_and_files.sort()
 
-        assert get_packages_items == self.packages
-        assert package_file not in get_packages_items
+        assert get_packages() != packages_and_files
+        assert get_packages() == self.packages
 
     def test_get_package_files(self):
-        for package in self.packages:
-            assert get_package_files(package) == []
+        env_create_packages(self.workspace, self.packages)
 
-        self.create_packages()
-        self.create_package_files()
+        for p in self.packages:
+            assert get_package_files(p) == []
 
-        for package in self.packages:
-            package_files = [Path(self.workspace, package, f)
-                    for f in self.package_files]
-            package_files.sort(reverse=True)
-            assert get_package_files(package) == package_files
+        env_create_package_files(self.workspace, self.packages, self.files)
 
-    def test_get_package(self):
-        for package in self.packages:
-            for f in self.package_files:
-                assert get_file(package, f) == False
+        for p in self.packages:
+            files = [Path(self.workspace, p, '%s.tar.gz' % f)
+                    for f in self.files]
+            assert get_package_files(p) == files
 
-        self.create_package_files()
+    def test_get_file(self):
+        for p in self.packages:
+            for f in self.files:
+                assert get_file(p, f) == False
 
-        for package in self.packages:
-            for f in self.package_files:
-                assert get_file(package, f) == Path(self.workspace, package, f)
+        env_create_package_files(self.workspace, self.packages, self.files)
 
-    def test_get_latest_file(self):
-        self.create_package_files()
-
-        for package in self.packages:
-            assert get_latest_file(package) == self.package_files[-1:][0]
-
-if __name__ == '__main__':
-    unittest.main()
+        for p in self.packages:
+            for f in self.files:
+                f = '%s.tar.gz' % f
+                assert get_file(p, f) == Path(self.workspace, p, f)

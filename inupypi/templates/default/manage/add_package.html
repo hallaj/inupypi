@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}inetutils PyPI Server{% endblock %}
+{% block content %}
+<h1>Add package to the repository</h1>
+
+<div class="rows">
+    <form action="#" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Add Package</legend>
+
+            <div class="rows">
+                <label for="browse">Browse</label>
+                <input name="package" type="file" />
+            </div>
+
+            <div class="rows">
+                <input type="submit" value="Upload" />
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

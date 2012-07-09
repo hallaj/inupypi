@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-from flask import Flask, Response
-from flask import abort, render_template, send_from_directory
+from flask import Flask
+from flask import abort, render_template, request, send_from_directory
 from flask.ext.assets import Environment, Bundle
 from inupypi import config
 from unipath import Path
@@ -15,9 +15,11 @@ assets = Environment(app)
 assets.register('css', Path(app.template_folder, 'static/style.css'),
         output='inupypi.css', filters='cssmin')
 
-pkg_path = Path(app.config.get('PKG_PATH', ''))
+package_path = Path(app.config.get('PACKAGE_PATH'))
 
-if not pkg_path.isabsolute():
-    app.config['PKG_PATH'] = Path(app.root_path, pkg_path)
+if not package_path.isabsolute():
+    app.config['PACKAGE_PATH'] = Path(app.root_path,
+            app.config.get('PACKAGE_PATH'))
 
 import inupypi.views
+import inupypi.views.manage

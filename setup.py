@@ -7,10 +7,11 @@ from setuptools import setup, find_packages
 
 setup(
         name='inupypi',
-        version='0.2.1',
+        version='0.2.2',
         packages=find_packages(),
         include_package_data=True,
         zip_safe=False,
         test_suite='tests',
-        install_requires=['Flask', 'Flask-Assets', 'cssmin', 'unipath']
+        install_requires=['Flask', 'Flask-Assets', 'cssmin', 'pkgtools',
+            'unipath']
         )
