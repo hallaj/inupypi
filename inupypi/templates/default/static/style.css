@@ -12,3 +12,4 @@ a, a:active, a:link {color:#00008b;text-decoration:none;}
 .rows {padding:5px 0 0 0;}
 .rows .header {border-bottom:1px solid #ccc;display:block;float:left;font-weight:bold;padding:0 10px 10px 10px;width:150px;}
 .rows .item {border-bottom:1px solid #ccc;display:block;float:left;padding:10px;text-align:left;width:150px;height:20px;}
+.info {border-bottom:1px solid #333;font-weight:bold;display:block;float:left;padding:0 10px 0 10px;width:150px;}

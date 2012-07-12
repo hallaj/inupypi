@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}inetutils PyPI Server{% endblock %}
+{% block content %}
+{% if metadata.has_metadata %}
+{% set pkginfo = metadata.metadata['PKG-INFO'] %}
+
+<div class="rows">
+    <span class="item">Name</span>
+    <span class="item">{{ pkginfo['Name'] }}</span>
+</div>
+
+<div class="clear"></div>
+
+<div class="rows">
+    <span class="item">Author</span>
+    <span class="item">{{ pkginfo['Author'] }}</span>
+</div>
+
+<div class="clear"></div>
+
+{% for key in pkginfo %}
+<div class="rows">
+    <span class="item">{{ key }}</span>
+    <span class="item"><pre>{{ pkginfo[key] }}</pre></span>
+</div>
+
+<div class="clear"></div>
+
+{% endfor %}
+{% endif %}
+{% endblock %}

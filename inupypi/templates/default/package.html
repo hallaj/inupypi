@@ -8,6 +8,7 @@
     <div class="rows">
         <span class="header">Name</span>
         <span class="header">Size</span>
+        <span class="header">Metadata</span>
     </div>
 
     <div class="clear"></div>
@@ -15,9 +16,12 @@
     {% for f in files %}
     <div class="rows">
         <span class="item">
-            <a href="{{ url_for('package_get', package_name=f.parent.name, filename=f.name) }}">{{ f.name }}</a>
+            <a href="{{ url_for('package_get', package_name=f.filepath.parent.name, filename=f.filepath.name) }}">{{ f.filepath.name }}</a>
         </span>
-        <span class="item">{{ f.size() }}</span>
+        <span class="item">{{ f.filepath.size() }}</span>
+        <span class="item">
+            <a href="{{ url_for('package_metadata', package=f.filepath.parent.name, filename=f.filepath.name) }}">{{ f.description.name }}'s Metadata</a>
+        </span>
     </div>
 
     <div class="clear"></div>

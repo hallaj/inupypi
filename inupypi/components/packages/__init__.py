@@ -2,11 +2,14 @@
 # -*- coding: utf8 -*-
 
 from inupypi import abort, app
+from pkgtools.pkg import SDist
 from unipath import Path
 
 
 class Package(object):
-    package = ''
+    filepath = None
+    description = None
+    current = None
 
 def get_package_path():
     path = Path(app.config.get('PACKAGE_PATH', ''))
@@ -17,11 +20,18 @@ def get_package_path():
 
 def get_packages():
     packages = []
-    folders = [folder for folder in get_package_path().listdir()
-            if folder.isdir()]
+    folders = [Path(folder) for folder in get_package_path().listdir()
+            if folder.isdir() and folder.listdir() != []]
 
     for package in folders:
-        packages.append(package.name)
+        p = Package()
+        p.filepath = package
+        p.current = get_current_package(package)
+        try:
+            p.description = SDist(p.current)
+        except Exception:
+            pass
+        packages.append(p)
     return packages
 
 def get_package_files(package):
@@ -29,9 +39,27 @@ def get_package_files(package):
     files = []
 
     for package_file in package_dir.listdir():
-        files.append(package_file)
-    files.sort(reverse=True)
-    return files
+        p = Package()
+        p.filepath = package_file
+        try:
+            p.description = SDist(package_file)
+        except Exception:
+            pass
+        files.append(p)
+    return sorted(files, reverse=True)
+
+def get_current_package(package):
+    package_dir = Path(get_package_path(), package)
+    contents = sorted(package_dir.listdir(), reverse=True)
+    return contents[0] if contents else None
+
+def get_metadata(package, filename):
+    package_file = Path(get_package_path(), package, filename)
+
+    try:
+        return SDist(package_file)
+    except Exception:
+        return None
 
 def get_file(package, filename):
     package_file = Path(get_package_path(), package, filename)

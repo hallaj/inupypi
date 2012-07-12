@@ -26,6 +26,12 @@ def package(package_name):
             files=get_package_files(package_name))
 
 
+@app.route('/package/metadata/<package>/<filename>/')
+def package_metadata(package, filename):
+    return render_template('metadata.html',
+            metadata=get_metadata(package, filename))
+
+
 @app.route('/<package_name>/get/<filename>')
 def package_get(package_name, filename):
     package = get_file(package_name, filename)

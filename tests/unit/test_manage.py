@@ -17,8 +17,7 @@ class Test_Manage(unittest.TestCase):
         self.workspace = Path(tempfile.mkdtemp())
         self.tmp_workspace = Path(tempfile.mkdtemp())
         self.packages = ['p1', 'p2', 'p3', 'p4']
-        self.files = ['f1', 'f2', 'f3', 'f4']
-        self.files.sort(reverse=True)
+        self.files = sorted(['f1', 'f2', 'f3', 'f4'], reverse=True)
 
         self.app.application.config['PACKAGE_PATH'] = self.workspace
 
@@ -37,10 +36,14 @@ class Test_Manage(unittest.TestCase):
                 stream = open(Path(self.tmp_workspace, p, filename))
                 fs = FileStorage(filename=filename, stream=stream)
                 upload_package(fs)
-
-        assert self.packages == get_packages()
+        packages = [p.filepath for p in get_packages()]
+        created_packages = [Path(self.workspace, package)
+                for package in self.packages]
+        assert packages == created_packages
 
         for p in self.packages:
-            files = [Path(self.workspace, p, '%s.tar.gz' % f)
-                    for f in self.files]
-            assert files == get_package_files(p)
+            files = sorted([Path(self.workspace, p, '%s.tar.gz' % f)
+                    for f in self.files])
+            package_files = sorted([pkg.filepath
+                for pkg in get_package_files(p)])
+            assert files == package_files

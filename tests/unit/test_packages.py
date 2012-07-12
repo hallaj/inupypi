@@ -34,19 +34,30 @@ class Test_Packages(unittest.TestCase):
 
     def test_get_packages(self):
         assert get_packages() == []
+
         env_create_packages(self.workspace, self.packages)
-        assert get_packages() == self.packages
+        env_create_package_files(self.workspace, self.packages, self.files)
+        created_packages = [Path(self.workspace, package)
+                for package in self.packages]
+        packages = [p.filepath for p in get_packages()]
+
+        assert created_packages == packages
 
     def test_get_packages_from_folders_only(self):
-        env_create_packages(self.workspace, self.packages)
-        env_create_packages(self.workspace, self.files, files=True)
+        assert get_packages() == []
 
-        packages_and_files = [Path(package)
-                for package in self.packages + self.files]
-        packages_and_files.sort()
+        env_create_packages(self.workspace, self.packages)
+        env_create_package_files(self.workspace, self.packages, self.files)
+
+        packages_and_files = sorted([Path(package)
+                for package in self.packages + self.files])
+
+        created_packages = [Path(self.workspace, package)
+                for package in self.packages]
+        packages = [p.filepath for p in get_packages()]
 
         assert get_packages() != packages_and_files
-        assert get_packages() == self.packages
+        assert created_packages == packages
 
     def test_get_package_files(self):
         env_create_packages(self.workspace, self.packages)
@@ -57,9 +68,20 @@ class Test_Packages(unittest.TestCase):
         env_create_package_files(self.workspace, self.packages, self.files)
 
         for p in self.packages:
-            files = [Path(self.workspace, p, '%s.tar.gz' % f)
-                    for f in self.files]
-            assert get_package_files(p) == files
+            files = sorted([Path(self.workspace, p, '%s.tar.gz' % f)
+                    for f in self.files])
+            package_files = sorted([pkg.filepath
+                for pkg in get_package_files(p)])
+            assert package_files == files
+
+    def test_get_current_package(self):
+        env_create_packages(self.workspace, self.packages)
+        env_create_package_files(self.workspace, self.packages, self.files)
+
+        for p in self.packages:
+            created_packages = Path(self.workspace, p, '%s.tar.gz' %
+                    sorted(self.files, reverse=True)[0])
+            assert get_current_package(p) == created_packages
 
     def test_get_file(self):
         for p in self.packages:

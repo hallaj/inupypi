@@ -31,6 +31,7 @@ class Test_Inupypi(unittest.TestCase):
 
     def test_app_with_package_folders(self):
         env_create_packages(self.workspace, self.packages)
+        env_create_package_files(self.workspace, self.packages, self.files)
         assert 'inetutils PyPI Server' in self.app.get('/').data
         assert 'Available Packages' in self.app.get('/').data
 

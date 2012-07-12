@@ -6,6 +6,8 @@
 <h1>Available Packages</h1>
     <div class="rows">
         <span class="header">Name</span>
+        <span class="header">Author</span>
+        <span class="header">Latest</span>
     </div>
 
     <div class="clear"></div>
@@ -13,7 +15,13 @@
     {% for p in packages %}
     <div class="rows">
         <span class="item">
-            <a href="{{ url_for('package', package_name=p) }}">{{ p }}</a>
+            <a href="{{ url_for('package', package_name=p.filepath.name) }}">{{ p.filepath.name }}</a>
+        </span>
+        <span class="item">
+            {% if p.description.has_metadata %}{{ p.description.metadata['PKG-INFO'].Author }}{% endif %}
+        </span>
+        <span class="item">
+            {% if p.current %}<a href="{{ url_for('package_get', package_name=p.filepath.name, filename=p.current.name) }}">{{ p.current.name }}{% endif %}</a>
         </span>
     </div>
 
