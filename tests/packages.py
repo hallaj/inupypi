@@ -9,15 +9,15 @@ from unipath import Path
 def env_create_packages(workspace, packages, files=False):
     for p in packages:
         if not files:
-            Path(workspace, p).mkdir(parents=True)
+            Path(workspace, 'test', p).mkdir(parents=True)
         else:
-            Path(workspace, p).write_file('')
+            Path(workspace, 'test', p).write_file('')
 
 def env_create_package_files(workspace, packages, files):
     for p in packages:
         if files:
             for f in files:
-                f = Path(workspace, p, f)
+                f = Path(workspace, 'test', p, f)
                 f.mkdir(parents=True)
                 version = '.'.join([x for x in f.name if x.isdigit()])
                 i = env_create_package_pkginfo(p, version)
@@ -31,7 +31,7 @@ def env_create_package_files(workspace, packages, files):
                 tar.close()
                 f.rmtree()
         else:
-            Path(workspace, p).mkdir(parents=True)
+            Path(workspace, 'test', p).mkdir(parents=True)
 
 def env_create_package_pkginfo(name, version):
     c = []

@@ -15,13 +15,13 @@ class Test_Inupypi(unittest.TestCase):
         self.workspace = Path(tempfile.mkdtemp())
         self.packages = ['p1', 'p2', 'p3', 'p4']
         self.files = ['f1', 'f2', 'f3', 'f4']
-        self.app.application.config['PACKAGE_PATH'] = self.workspace
+        self.app.application.config['EGGBASKET_REPO'] = self.workspace
 
     def tearDown(self):
         self.workspace.rmtree()
 
     def test_app_with_missing_package_dir(self):
-        self.app.application.config['PACKAGE_PATH'] = Path(self.workspace, 'a')
+        self.app.application.config['EGGBASKET_REPO'] = Path(self.workspace, 'a')
         assert self.app.get('/').status_code == 500
         assert '500 - Internal Server Error' in self.app.get('/').data
 
@@ -33,7 +33,7 @@ class Test_Inupypi(unittest.TestCase):
         env_create_packages(self.workspace, self.packages)
         env_create_package_files(self.workspace, self.packages, self.files)
         assert 'inetutils PyPI Server' in self.app.get('/').data
-        assert 'Available Packages' in self.app.get('/').data
+        assert 'Available EggBaskets' in self.app.get('/').data
 
     def test_app_package(self):
         env_create_packages(self.workspace, self.packages)
@@ -48,14 +48,14 @@ class Test_Inupypi(unittest.TestCase):
 
         for p in self.packages:
             for f in self.files:
-                assert f in self.app.get('/'+p+'/').data
+                assert f in self.app.get('/test/'+p+'/').data
 
     def test_app_package_file(self):
         env_create_packages(self.workspace, self.packages)
 
         for p in self.packages:
             for f in self.files:
-                response = self.app.get('/'+p+'/get/'+f)
+                response = self.app.get('/test/'+p+'/get/'+f)
                 assert response.status_code == 404
 
         env_create_package_files(self.workspace, self.packages, self.files)
@@ -63,7 +63,7 @@ class Test_Inupypi(unittest.TestCase):
         for p in self.packages:
             for f in self.files:
                 f = '%s.tar.gz' % f
-                response = self.app.get('/'+p+'/get/'+f)
+                response = self.app.get('/test/'+p+'/get/'+f)
                 assert response.status_code == 200
                 assert response.content_type == 'application/x-tar'
                 assert response.headers.get('Content-Disposition') == \
