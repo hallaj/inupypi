@@ -1,0 +1,2 @@
+recursive-include inupypi/static *
+recursive-include inupypi/templates *
