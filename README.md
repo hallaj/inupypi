@@ -55,5 +55,6 @@ tests
 
 To run the tests: 
 
-1. export INUPYPI_SETTINGS='<FULL PATH OF CONFIG FILE>'
-2. python setup.py test
+    1. export INUPYPI_SETTINGS = "<FULL PATH OF CONFIG FILE>"
+
+    2. python setup.py test
