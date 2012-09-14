@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='inupypi',
-        version='0.2.3',
+        version='0.2.4',
         packages=find_packages(),
         maintainer='Hallaj Subery',
         maintainer_email='hallajs@gmail.com',
