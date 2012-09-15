@@ -12,7 +12,7 @@ def page_not_found(error):
 
 @app.errorhandler(500)
 def internal_server_error(error):
-    return render_template('500.html'), 500
+    return render_template('500.html', error=error), 500
 
 @app.route('/')
 def index():
