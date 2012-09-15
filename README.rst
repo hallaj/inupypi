@@ -26,22 +26,24 @@ To run in command line:
     
     python app.py
 
-To run under apache mod_wsgi::
+To run inupypi under apache mod_wsgi:
 
-    1. pip install inupypi
-    
-    2. create app.py with the following content:
-    
-        import os
-        os.environ["INUPYPI_SETTINGS"] = os.path.dirname(os.path.realpath(__file__)) + '/config.ini'
-        from inupypi import app as application
+1. Install inupypi::
 
-    3. create config.ini with the following content:
+    pip install inupypi
     
-        DEBUG = False 
-        EGGBASKET_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
+2. create app.py with the following content::
+    
+    import os
+    os.environ["INUPYPI_SETTINGS"] = os.path.dirname(os.path.realpath(__file__)) + '/config.ini'
+    from inupypi import app as application
 
-    4. create apache conf file with the following content and save it on /etc/apache/conf.d/inupypi
+3. create config.ini with the following content (This will not be necessary once configure distcmd is done)::
+    
+    DEBUG = False 
+    EGGBASKET_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
+
+4. create apache conf file with the following content and save it on /etc/apache/conf.d/inupypi::
     
         WSGIScriptAlias /inupypi  <FULL PATH OF YOUR app.py created on step 2>
         WSGIDaemonProcess inupypi user=<USER> group=<GROUP>\
