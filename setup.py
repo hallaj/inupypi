@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='inupypi',
-        version='0.2.5.1',
+        version='0.2.5.2',
         packages=find_packages(),
         long_description=open("README.rst").read(),
         maintainer='Hallaj Subery',
