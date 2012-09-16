@@ -9,6 +9,7 @@ setup(
         name='inupypi',
         version='0.2.5.3',
         packages=find_packages(),
+        url="https://github.com/hallaj/inupypi",
         long_description=open("README.rst").read(),
         maintainer='Hallaj Subery',
         maintainer_email='hallajs@gmail.com',
