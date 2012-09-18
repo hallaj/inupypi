@@ -23,7 +23,7 @@ class Test_Inupypi(unittest.TestCase):
     def test_app_with_missing_package_dir(self):
         self.app.application.config['EGGBASKET_REPO'] = Path(self.workspace, 'a')
         assert self.app.get('/').status_code == 500
-        assert '500 - Internal Server Error' in self.app.get('/').data
+        assert '500:' in self.app.get('/').data
 
     def test_app_without_packages(self):
         assert 'inetutils PyPI Server' in self.app.get('/').data
