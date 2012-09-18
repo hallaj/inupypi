@@ -18,13 +18,13 @@ class Test_Packages(unittest.TestCase):
         self.files = ['f1', 'f2', 'f3', 'f4']
         self.files.sort(reverse=True)
 
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
 
     def tearDown(self):
         self.workspace.rmtree()
 
     def test_get_packages_without_packages_folder(self):
-        self.app.application.config['EGGBASKET_REPO'] = Path(self.workspace, 'a')
+        self.app.application.config['INUPYPI_REPO'] = Path(self.workspace, 'a')
 
         try:
             get_packages('test')
@@ -33,7 +33,7 @@ class Test_Packages(unittest.TestCase):
             return True
 
     def test_get_packages(self):
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
         env_create_packages(self.workspace, self.packages)
         env_create_package_files(self.workspace, self.packages, self.files)
         created_packages = [Path(self.workspace, 'test', package)
@@ -42,7 +42,7 @@ class Test_Packages(unittest.TestCase):
         assert created_packages == packages
 
     def test_get_packages_from_folders_only(self):
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
         env_create_packages(self.workspace, self.packages)
         env_create_package_files(self.workspace, self.packages, self.files)
 
@@ -57,7 +57,7 @@ class Test_Packages(unittest.TestCase):
         assert created_packages == packages
 
     def test_get_package_files(self):
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
         env_create_packages(self.workspace, self.packages)
 
         for p in self.packages:
@@ -73,7 +73,7 @@ class Test_Packages(unittest.TestCase):
             assert package_files == files
 
     def test_get_current_package(self):
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
         env_create_packages(self.workspace, self.packages)
         env_create_package_files(self.workspace, self.packages, self.files)
 
@@ -83,7 +83,7 @@ class Test_Packages(unittest.TestCase):
             assert get_current_package('test', p) == created_packages
 
     def test_get_file(self):
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
         env_create_packages(self.workspace, self.packages)
         env_create_package_files(self.workspace, self.packages, self.files)
         for p in self.packages:

@@ -15,13 +15,13 @@ class Test_Inupypi(unittest.TestCase):
         self.workspace = Path(tempfile.mkdtemp())
         self.packages = ['p1', 'p2', 'p3', 'p4']
         self.files = ['f1', 'f2', 'f3', 'f4']
-        self.app.application.config['EGGBASKET_REPO'] = self.workspace
+        self.app.application.config['INUPYPI_REPO'] = self.workspace
 
     def tearDown(self):
         self.workspace.rmtree()
 
     def test_app_with_missing_package_dir(self):
-        self.app.application.config['EGGBASKET_REPO'] = Path(self.workspace, 'a')
+        self.app.application.config['INUPYPI_REPO'] = Path(self.workspace, 'a')
         assert self.app.get('/').status_code == 500
         assert '500:' in self.app.get('/').data
 

@@ -13,7 +13,7 @@ To run in command line:
 2. create config.ini with the following content::
 
     DEBUG = True
-    EGGBASKET_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
+    INUPYPI_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
 
 3. run app.py::
 
@@ -25,28 +25,14 @@ To run inupypi under apache mod_wsgi:
 
     pip install inupypi
 
-2. Edit the supplied app.py commenting out the last line leaving only::
-
-    import os
-    os.environ["INUPYPI_SETTINGS"] = os.path.dirname(os.path.realpath(__file__)) + '/config.ini'
-    from inupypi import app as application
-
-3. create config.ini with the following content (This will not be necessary once configure distcmd is done)::
+2. create config.ini with the following content (This will not be necessary once configure distcmd is done)::
 
     DEBUG = False
-    EGGBASKET_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
+    INUPYPI_REPO = '<FULL PATH TO INUPYPI REPO>'
 
-4. create apache conf file with the following content and save it on /etc/apache/conf.d/inupypi::
+3. edit and then save the httpd-inupypi.conf.sample into httpd's conf directory and ensure it's being included in httpd.conf
 
-        WSGIScriptAlias /inupypi  <FULL PATH OF YOUR app.py created on step 2>
-        WSGIDaemonProcess inupypi user=<USER> group=<GROUP>\
-            home=<FULL PATH OF app.py parent directory> \
-            python-path=<PYTHON PATH>
-
-        <Location /inupypi>
-            WSGIProcessGroup inupypi
-            WSGIPassAuthorization On
-        </Location>
+4. start / restart your apache and browse to http://httpd_host/inupypi
 
 Why another pypiserver application ?
 ====================================
@@ -68,6 +54,4 @@ Tests
 
 To run the tests::
 
-    1. export INUPYPI_SETTINGS = "<FULL PATH OF CONFIG FILE>"
-
-    2. python setup.py test
+    1. python setup.py test

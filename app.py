@@ -1,4 +1,21 @@
-import os
-os.environ["INUPYPI_SETTINGS"] = os.path.dirname(os.path.realpath(__file__)) + '/config.ini'
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
+
+from argparse import ArgumentParser
 from inupypi import app as application
-application.run()
+from os import environ
+from unipath import Path
+
+config_file = 'config.ini'
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description='inupypi - PyPiServer based on Flask')
+    parser.add_argument('-c', '--config', help='inupypi config.ini')
+    args = parser.parse_args()
+    config_file = args.config or environ.get('INUPYPI_SETTINGS') or config_file
+    config_file = Path(config_file).absolute()
+    application.config.from_pyfile(config_file)
+    application.run()
+else:
+    config_file = Path(config_file).absolute()
+    application.config.from_pyfile(config_file)

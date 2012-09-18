@@ -11,17 +11,17 @@ from werkzeug import secure_filename
 class Package(object):
     filepath = None
     name = None
-    author = None 
+    author = None
     current = None
 
 def get_eggbaskets():
-    path = Path(app.config.get('EGGBASKET_REPO', ''))
+    path = Path(app.config.get('INUPYPI_REPO', ''))
     if not path.exists() and not path.isdir():
         abort(500, "%s doesn't exist." % path)
     return os.listdir(path)
 
 def get_package_path(eggbasket):
-    path = Path(app.config.get('EGGBASKET_REPO', ''), eggbasket)
+    path = Path(app.config.get('INUPYPI_REPO', ''), eggbasket)
 
     if not path.exists() and not path.isdir():
         abort(500)
@@ -36,7 +36,7 @@ def get_packages(eggbasket):
         p = Package()
         p.filepath = package
         p.current = get_current_package(eggbasket, package)
-        p.eggbasket = eggbasket 
+        p.eggbasket = eggbasket
         try:
             p.author = SDist(p.current).metadata['PKG-INFO']['Author']
         except Exception:
@@ -54,7 +54,7 @@ def get_package_files(eggbasket, package):
     for package_file in package_dir.listdir():
         p = Package()
         p.filepath = package_file
-        p.eggbasket = eggbasket 
+        p.eggbasket = eggbasket
         try:
             p.name = SDist(package_file).name
             p.author = SDist(package_file).metadata['PKG-INFO']['Author']
@@ -66,7 +66,7 @@ def get_package_files(eggbasket, package):
 def get_current_package(eggbasket, package):
     package_dir = Path(get_package_path(eggbasket), package)
     contents = sorted(package_dir.listdir(), reverse=True)
-    return contents[0] if contents else 'unknown' 
+    return contents[0] if contents else 'unknown'
 
 def get_metadata(eggbasket, package, filename):
     package_file = Path(get_package_path(eggbasket), package, filename)
@@ -84,11 +84,11 @@ def get_file(eggbasket, package, filename):
     return False
 
 def create_eggbasket(eggbasket):
-    os.makedirs(Path(app.config.get('EGGBASKET_REPO'), eggbasket))
+    os.makedirs(Path(app.config.get('INUPYPI_REPO'), eggbasket))
 
 def create_package_folder(eggbasket, package):
-    os.makedirs(Path(app.config.get('EGGBASKET_REPO'), eggbasket, package))
+    os.makedirs(Path(app.config.get('INUPYPI_REPO'), eggbasket, package))
 
 def upload_file(eggbasket, package, f):
     filename = secure_filename(f.filename)
-    f.save(Path(app.config.get('EGGBASKET_REPO'), eggbasket, package, filename))
+    f.save(Path(app.config.get('INUPYPI_REPO'), eggbasket, package, filename))
