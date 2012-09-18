@@ -48,6 +48,13 @@ To run inupypi under apache mod_wsgi:
             WSGIPassAuthorization On
         </Location>
 
+Why another pypiserver ?
+========================
+
+1. We could not find another pypiserver that supported multiple eggbaskets.
+
+2. We wanted to have templates with our pypiserver so that formatting can be easily done. 
+
 TODO
 ====
 
