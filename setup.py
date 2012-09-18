@@ -14,7 +14,7 @@ setup(
         maintainer='Hallaj Subery',
         maintainer_email='hallajs@gmail.com',
         license="BSD",
-        description='A PyPiServer based on the Flask Framework',
+        description='A PyPiServer based on the Flask Framework and supports multiple eggbaskets.',
         platform='Linux,FreeBSD',
         include_package_data=True,
         zip_safe=False,
