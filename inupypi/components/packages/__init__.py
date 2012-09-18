@@ -5,12 +5,13 @@ import os
 from inupypi import abort, app
 from pkgtools.pkg import SDist
 from unipath import Path
+from werkzeug import secure_filename
 
 
 class Package(object):
     filepath = None
     name = None
-    author = 'unknown'
+    author = None 
     current = None
 
 def get_eggbaskets():
@@ -29,7 +30,7 @@ def get_package_path(eggbasket):
 def get_packages(eggbasket):
     packages = []
     folders = [Path(folder) for folder in get_package_path(eggbasket).listdir()
-            if folder.isdir() and folder.listdir() != []]
+            if folder.isdir()]# and folder.listdir() != []]
 
     for package in folders:
         p = Package()
@@ -65,7 +66,7 @@ def get_package_files(eggbasket, package):
 def get_current_package(eggbasket, package):
     package_dir = Path(get_package_path(eggbasket), package)
     contents = sorted(package_dir.listdir(), reverse=True)
-    return contents[0] if contents else None
+    return contents[0] if contents else 'unknown' 
 
 def get_metadata(eggbasket, package, filename):
     package_file = Path(get_package_path(eggbasket), package, filename)
@@ -81,3 +82,13 @@ def get_file(eggbasket, package, filename):
     if package_file.exists() and package_file.isfile():
         return package_file
     return False
+
+def create_eggbasket(eggbasket):
+    os.makedirs(Path(app.config.get('EGGBASKET_REPO'), eggbasket))
+
+def create_package_folder(eggbasket, package):
+    os.makedirs(Path(app.config.get('EGGBASKET_REPO'), eggbasket, package))
+
+def upload_file(eggbasket, package, f):
+    filename = secure_filename(f.filename)
+    f.save(Path(app.config.get('EGGBASKET_REPO'), eggbasket, package, filename))

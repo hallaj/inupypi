@@ -2,9 +2,18 @@
 {% block title %}inetutils PyPI Server{% endblock %}
 {% block content %}
 
+<div class="clear"></div>
+<form action="/createeggbasket" method="post" enctype="multipart/form-data">
+        <div class="rows">
+            <label for="browse">Name</label>
+            <input name="eggbasket" type="text" />
+            <input type="submit" value="Create Egg Basket" />
+        </div>
+</form>
+
 {% if eggbaskets %}
-<h1>Available EggBaskets</h1>
-    <div class="clear"></div>
+</br>
+<h3>Available EggBaskets</h3>
     {% for e in eggbaskets %}
     <div class="rows">
         <span class="item">
