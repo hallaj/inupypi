@@ -17,7 +17,7 @@ class Package(object):
 def get_eggbaskets():
     path = Path(app.config.get('EGGBASKET_REPO', ''))
     if not path.exists() and not path.isdir():
-        abort(500)
+        abort(500, "%s doesn't exist." % path)
     return os.listdir(path)
 
 def get_package_path(eggbasket):

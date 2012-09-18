@@ -7,8 +7,10 @@ from setuptools import setup, find_packages
 
 setup(
         name='inupypi',
-        version='0.2.4',
+        version='0.2.5.4',
         packages=find_packages(),
+        url="https://github.com/hallaj/inupypi",
+        long_description=open("README.rst").read(),
         maintainer='Hallaj Subery',
         maintainer_email='hallajs@gmail.com',
         license="BSD",
