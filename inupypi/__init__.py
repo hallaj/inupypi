@@ -18,5 +18,4 @@ assets.register('css', Path(app.template_folder, 'static/style.css'),
         output='inupypi.css', filters='cssmin')
 
 import inupypi.views
-import inupypi.views.manage
 
