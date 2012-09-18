@@ -1,0 +1,4 @@
+Version 0.2.6
+=============
+
+- Added Changelog file to track changes between releases
