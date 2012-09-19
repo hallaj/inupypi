@@ -102,7 +102,8 @@ case "$1" in
 	esac
 	;;
   status)
-       status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
+       checkproc "$DAEMON"
+       rc_status -v
        ;;
   #reload|force-reload)
 	#
