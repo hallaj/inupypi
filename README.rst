@@ -54,4 +54,8 @@ Tests
 
 To run the tests::
 
-    1. python setup.py test
+    1. python setup.py develop
+
+    2. export export INUPYPI_SETTINGS=<full path to config.ini>
+
+    3. python setup.py test
