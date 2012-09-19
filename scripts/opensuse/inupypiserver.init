@@ -16,8 +16,8 @@
 
 # Default-Start: 3 5
 # Default-Stop: 0 1 2 6
-# Short-Description: Daemonized version of deluge.
-# Description:       Starts the deluge daemon.
+# Short-Description: Daemonized version of inupypiserver.
+# Description:       Starts the inupypiserver daemon.
 ### END INIT INFO
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
@@ -34,7 +34,7 @@ VERBOSE=""
 . /lib/lsb/init-functions
 
 DAEMON=${INUPYPISERVER_VIRTUALENV}/bin/inupypi_server
-DAEMON_ARGS="-c ${INUPYPISERVER_CONFIG_FILE}"
+DAEMON_ARGS="-c ${INUPYPISERVER_CONFIG_FILE} -k ${INUPYPISERVER_HOST} -p ${INUPYPISERVER_PORT}"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
@@ -103,7 +103,7 @@ case "$1" in
 	;;
   status)
        checkproc "$DAEMON"
-       rc_status -v
+       rc_status -v 
        ;;
   #reload|force-reload)
 	#
