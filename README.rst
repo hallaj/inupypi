@@ -15,9 +15,10 @@ To run in command line:
     DEBUG = True
     INUPYPI_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
 
-3. run app.py::
+3. run inupypi_server::
 
-    python app.py
+    . <virtualenv_path>/bin/activate
+    inupypi_server -c <path_to_config_ini_file> 
 
 To run inupypi under apache mod_wsgi:
 
