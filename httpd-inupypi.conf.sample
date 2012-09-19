@@ -1,0 +1,11 @@
+WSGIScriptAlias /inupypi /PATH/TO/INUPYPI/app.py
+WSGIDaemonProcess inupypi user=RUN_USER group=RUN_GROUP \
+    home=/PATH/TO/INUPYPI \
+    python-path=/PATH/TO/INUPYPI/VIRTUALENV/lib/pythonX.X/site-packages
+
+<Location /inupypi>
+    WSGIProcessGroup inupypi
+    WSGIPassAuthorization On
+    Order Allow,Deny
+    Allow From All
+</Location>
