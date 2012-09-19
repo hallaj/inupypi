@@ -4,6 +4,7 @@
 import os
 
 from setuptools import setup, find_packages
+extra= dict(scripts=["inupypi_server"])
 
 setup(
         name='inupypi',
@@ -21,5 +22,6 @@ multiple repositories.",
         zip_safe=False,
         test_suite='tests',
         install_requires=['Flask', 'Flask-Assets', 'argparse', 'cssmin',
-            'pkgtools', 'unipath']
-        )
+            'pkgtools', 'unipath'],
+        **extra
+    )
