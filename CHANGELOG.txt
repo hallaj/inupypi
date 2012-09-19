@@ -1,4 +1,8 @@
-Version 0.2.6
+Version 0.2.5.6
 =============
 
 - Added Changelog file to track changes between releases
+- Changed the way that app.py work, so that setting INUPYPI_SETTINGS is not a
+  must
+- app.py now can also accept an argument to point at external config file.
+- Updated README.rst with changes done.
