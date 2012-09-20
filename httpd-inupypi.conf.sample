@@ -1,4 +1,4 @@
-WSGIScriptAlias /inupypi /PATH/TO/INUPYPI/app.py
+WSGIScriptAlias /inupypi /PATH/TO/INUPYPI/inupypi_server
 WSGIDaemonProcess inupypi user=RUN_USER group=RUN_GROUP \
     home=/PATH/TO/INUPYPI \
     python-path=/PATH/TO/INUPYPI/VIRTUALENV/lib/pythonX.X/site-packages
