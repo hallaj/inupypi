@@ -8,9 +8,12 @@ from unipath import Path
 
 config_file = 'config.ini'
 parser = ArgumentParser(description='inupypi - PyPiServer based on Flask')
-parser.add_argument('-c', '--config', action='store', help='inupypi config.ini')
-parser.add_argument('-k', '--host', action='store', help='inupypi host settings')
-parser.add_argument('-p', '--port', action='store', help='inupypi port settings')
+parser.add_argument('-c', '--config', action='store',
+        help='inupypi config.ini')
+parser.add_argument('-k', '--host', action='store', default='127.0.0.1',
+        help='inupypi host settings')
+parser.add_argument('-p', '--port', action='store', default='5000',
+        help='inupypi port settings')
 args = parser.parse_args()
 config_file = args.config or environ.get('INUPYPI_SETTINGS') or config_file
 port = int(args.port)

@@ -8,7 +8,7 @@ extra= dict(scripts=["inupypi_server"])
 
 setup(
         name='inupypi',
-        version='0.2.5.6',
+        version='0.2.5.7',
         packages=find_packages(),
         url="https://github.com/hallaj/inupypi",
         long_description=open("README.rst").read(),
