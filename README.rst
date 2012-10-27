@@ -60,3 +60,9 @@ To run the tests::
     2. export export INUPYPI_SETTINGS=<full path to config.ini>
 
     3. python setup.py test
+
+
+Build Status (Travis CI)
+========================
+
+[![Build Status] (https://travis-ci.org/hallaj/inupypi.png)] (https://travis-ci.org/hallaj/inupypi)
