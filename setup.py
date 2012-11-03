@@ -11,7 +11,7 @@ setup(
         version='0.2.5.7',
         packages=find_packages(),
         url="https://github.com/hallaj/inupypi",
-        long_description=open("README.rst").read(),
+        long_description=open("README.md").read(),
         maintainer='Muhammad Hallaj Subery',
         maintainer_email='hallajs@gmail.com',
         license="BSD",
