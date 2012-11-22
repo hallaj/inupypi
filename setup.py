@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup(name='inupypi',
-      version='0.2.6',
+      version='0.2.6.1',
       packages=find_packages(),
       url="https://github.com/hallaj/inupypi",
       long_description=open("README.md").read(),
