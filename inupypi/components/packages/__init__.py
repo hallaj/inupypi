@@ -73,15 +73,10 @@ def get_package_files(eggbasket, package):
         p = Package()
         p.filepath = package_file
         p.eggbasket = eggbasket
-
-        try:
-            p.name = SDist(package_file).name
-            p.author = SDist(package_file).metadata['PKG-INFO']['Author']
-        except Exception:
-            p.name = p.filepath.name
-            p.author = None
+        p.name = p.filepath.name
+        p.author = None
         files.append(p)
-    return sorted(files, reverse=True)
+    return sorted(files)
 
 
 def get_current_package(eggbasket, package):
