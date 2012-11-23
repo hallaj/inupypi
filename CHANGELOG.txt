@@ -1,3 +1,8 @@
+Version 0.2.5.7
+===============
+- Fixed a few bugs regarding functionality as well as code clean up.
+- Fixed sorting bug reported by Grzegorz Śliwiński. re #12
+
 Version 0.2.5.6
 =============
 
