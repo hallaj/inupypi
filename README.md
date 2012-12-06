@@ -13,11 +13,13 @@ To run in command line:
 2. create config.ini with the following content::
 
     DEBUG = True
+
     INUPYPI_REPO = '<FULL PATH TO EGG BASKETS PARENT DIRECTORY>'
 
 3. run inupypi_server::
 
     . <virtualenv_path>/bin/activate
+
     inupypi_server -c <path_to_config_ini_file>
 
 To run inupypi under apache mod_wsgi:
@@ -29,6 +31,7 @@ To run inupypi under apache mod_wsgi:
 2. create config.ini with the following content (This will not be necessary once configure distcmd is done)::
 
     DEBUG = False
+
     INUPYPI_REPO = '<FULL PATH TO INUPYPI REPO>'
 
 3. edit and then save the httpd-inupypi.conf.sample into httpd's conf directory and ensure it's being included in httpd.conf
