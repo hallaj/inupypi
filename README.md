@@ -18,7 +18,7 @@ To run in command line:
 3. run inupypi_server::
 
     . <virtualenv_path>/bin/activate
-    inupypi_server -c <path_to_config_ini_file> 
+    inupypi_server -c <path_to_config_ini_file>
 
 To run inupypi under apache mod_wsgi:
 
@@ -34,6 +34,15 @@ To run inupypi under apache mod_wsgi:
 3. edit and then save the httpd-inupypi.conf.sample into httpd's conf directory and ensure it's being included in httpd.conf
 
 4. start / restart your apache and browse to http://httpd_host/inupypi
+
+Deploy with Apache
+==================
+
+1. Run the inupypi_configure.py script and fill in the values:
+
+    python inupypi_configure.py
+
+2. Copy the file to your apache configuration folder and keep your fingers crossed.
 
 Why another pypiserver application ?
 ====================================
