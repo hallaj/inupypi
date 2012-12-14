@@ -41,7 +41,7 @@ To run inupypi under apache mod_wsgi:
 Deploy with Apache
 ==================
 
-1. Run the inupypi_configure.py script and fill in the values. By default the user/group is inupypi and default config file is inupypi.conf:
+1. Run the inupypi_configure.py script and fill in the values. By default the user/group is inupypi and default config file is inupypi.conf::
 
     inupypi_configure.py
 
