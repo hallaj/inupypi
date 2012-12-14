@@ -24,7 +24,6 @@ parser.add_option('-k', '--inupypi-home',
 
 options, args = parser.parse_args()
 
-config_file = 'httpd-inupypi.conf'
 sample_file = config_file + '.sample'
 
 mappings = vars(options)
@@ -34,11 +33,11 @@ mappings['site_packages'] = get_python_lib()
 mappings['user'] = raw_input("User for inupypi :") or 'inupypi'
 mappings['group'] = raw_input("Group for inupypi :") or 'inupypi'
 
-print 'Creating config file %s with mappings %s' % (config_file,
-                                                    mappings)
+final_config = raw_input("File to write to: ") or 'inupypi.conf'
+
 
 with open(sample_file) as f1:
     template = Template(f1.read())
     content = template.safe_substitute(mappings)
-    with open(config_file, 'w') as f2:
-        f2.write(content)
+    with open(final_config,"w") as final_config:
+        final_config.write(content)
