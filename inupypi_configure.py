@@ -19,7 +19,7 @@ parser.add_option('-i', '--virtual-env',
                   help='Path to Inupypi Virtualenv [default: %default]')
 
 parser.add_option('-k', '--inupypi-home',
-                  default=None,
+                  default=Path(".").cwd(),
                   help='Path to Inupypi Home [default: %default]')
 
 options, args = parser.parse_args()
@@ -29,7 +29,7 @@ sample_file = config_file + '.sample'
 
 mappings = vars(options)
 mappings['virtual_env'] = mappings['virtual_env']
-mappings['inupypi_home'] = options.inupypi_home or Path(".").cwd()
+mappings['inupypi_home'] = options.inupypi_home
 mappings['site_packages'] = get_python_lib()
 mappings['user'] = raw_input("User for inupypi :") or 'inupypi'
 mappings['group'] = raw_input("Group for inupypi :") or 'inupypi'
