@@ -45,7 +45,7 @@ Deploy with Apache
 
     inupypi_configure.py
 
-2. Copy the file to your apache configuration folder and keep your fingers crossed.
+2. Copy the generated file to your apache configuration folder, restart Apache and keep your fingers crossed.
 
 Why another pypiserver application ?
 ====================================
