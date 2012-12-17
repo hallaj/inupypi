@@ -6,6 +6,7 @@ from optparse import OptionParser
 from string import Template
 from distutils.sysconfig import get_python_lib
 from unipath import Path
+import pkgutil
 
 usage = 'usage: %prog [options]'
 
@@ -24,8 +25,9 @@ parser.add_option('-k', '--inupypi-home',
 
 options, args = parser.parse_args()
 
-config_file = 'httpd-inupypi.conf'
-sample_file = config_file + '.sample'
+sample_file = pkgutil.get_data('conf_samples',
+                               'httpd-inupypi.conf.sample')
+
 
 mappings = vars(options)
 mappings['virtual_env'] = mappings['virtual_env']
@@ -37,8 +39,7 @@ mappings['group'] = raw_input("Group for inupypi :") or 'inupypi'
 final_config = raw_input("File to write to: ") or 'inupypi.conf'
 
 
-with open(sample_file) as f1:
-    template = Template(f1.read())
-    content = template.safe_substitute(mappings)
-    with open(final_config, "w") as final_config:
-        final_config.write(content)
+template = Template(sample_file)
+content = template.safe_substitute(mappings)
+with open(final_config, "w") as final_config:
+    final_config.write(content)
