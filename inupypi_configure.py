@@ -4,8 +4,8 @@ from __future__ import with_statement
 
 from optparse import OptionParser
 from string import Template
-from distutils.sysconfig import get_python_lib
 from unipath import Path
+import inupypi
 import pkgutil
 
 usage = 'usage: %prog [options]'
@@ -29,10 +29,13 @@ sample_file = pkgutil.get_data('conf_samples',
                                'httpd-inupypi.conf.sample')
 
 
+path_of_inupypi = Path(inupypi.__file__).parent.split('site-packages')[0]
+site_pkgs = Path(path_of_inupypi, 'site-packages')
+
 mappings = vars(options)
 mappings['virtual_env'] = mappings['virtual_env']
 mappings['inupypi_home'] = options.inupypi_home
-mappings['site_packages'] = get_python_lib()
+mappings['site_packages'] = site_pkgs
 mappings['user'] = raw_input("User for inupypi :") or 'inupypi'
 mappings['group'] = raw_input("Group for inupypi :") or 'inupypi'
 
