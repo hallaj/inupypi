@@ -1,6 +1,7 @@
 Version 0.2.6.4
 ===============
 - Added inupypi_configure.py script to help generate an apache.conf file for installed inupypi instance.
+- re #15 Changed inupypi_configure.py to use the proper way of calling and getting python lib.
 
 Version 0.2.6.1
 ===============
