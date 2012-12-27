@@ -57,7 +57,7 @@ def createpackagefolder():
         create_package_folder(request.form['eggbasket'], request.form['package'])
     return redirect(url_for('eggbasket', eggbasket=request.form['eggbasket']))
 
-@app.route('/uploadfile', methods=['POST'])
-def uploadfile():
+@app.route('/<eggbasket>/uploadfile', methods=['POST'])
+def uploadfile(eggbasket):
     upload_file(request.form['eggbasket'], request.form['package'], request.files['eggfile'])
     return redirect(url_for('package', eggbasket=request.form['eggbasket'], package_name=request.form['package']))
