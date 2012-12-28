@@ -26,8 +26,11 @@ def eggbasket(eggbasket):
 
 @app.route('/<eggbasket>/<package_name>/')
 def package(eggbasket, package_name):
-    return render_template('package.html',
+    try:
+        return render_template('package.html',
             files=get_package_files(eggbasket, package_name), eggbasket=eggbasket, package=package_name)
+    except Exceptions:
+        abort(400)
 
 
 @app.route('/package/metadata/<eggbasket>/<package>/<filename>/')
