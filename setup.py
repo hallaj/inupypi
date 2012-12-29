@@ -19,5 +19,5 @@ multiple repositories.",
       test_suite='tests',
       install_requires=['Flask', 'Flask-Assets', 'argparse', 'cssmin',
                         'pkgtools', 'unipath'],
-      scripts=['inupypi_server','inupypi_configure.py'],
-      package_data={'conf_samples':['httpd-inupypi.conf.sample']})
+      scripts=['inupypi_server', 'inupypi_configure.py'],
+      package_data={'conf_samples': ['httpd-inupypi.conf.sample']})
