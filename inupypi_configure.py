@@ -44,5 +44,5 @@ final_config = raw_input("File to write to: ") or 'inupypi.conf'
 
 template = Template(sample_file)
 content = template.safe_substitute(mappings)
-with open(final_config, "w") as final_config:
-    final_config.write(content)
+with Path(final_config) as final_config:
+    final_config.write_file(content)
