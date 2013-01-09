@@ -1,3 +1,9 @@
+Version 0.3-alpha1
+==================
+- Major revamp in the code to reduce the loading time.
+- Introduction of flask-themes in favour of custom handling themes.
+- Better if not more test converage.
+
 Version 0.2.6.4
 ===============
 - Added inupypi_configure.py script to help generate an apache.conf file for installed inupypi instance.
@@ -10,7 +16,6 @@ Version 0.2.6.1
 
 Version 0.2.5.6
 ===============
-
 - Added Changelog file to track changes between releases
 - Changed the way that app.py work, so that setting INUPYPI_SETTINGS is not a
   must
