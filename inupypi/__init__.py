@@ -2,15 +2,21 @@
 # -*- coding: utf8 -*-
 
 from flask import Flask
-from flask import abort, render_template, request, send_from_directory
-from flask.ext.assets import Environment
-from unipath import Path
+from flask.ext.themes import setup_themes
+from inupypi.views.admin import admin
+from inupypi.views.error import error
+from inupypi.views.main import main
 
-app = Flask(__name__)
-app.template_folder = Path(Path(__file__).parent, 'templates/default')
 
-assets = Environment(app)
-assets.register('css', Path(app.template_folder, 'static/style.css'),
-        output='inupypi.css', filters='cssmin')
+def create_app(**config):
+    app = Flask(__name__)
+    app.config.update(config)
+    app.config['THEME'] = app.config.get('THEME', 'inupypi')
 
-import inupypi.views
+    setup_themes(app)
+
+    app.register_blueprint(admin)
+    app.register_blueprint(error)
+    app.register_blueprint(main)
+
+    return app

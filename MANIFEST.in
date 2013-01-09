@@ -1,4 +1,0 @@
-recursive-include inupypi/static *
-recursive-include inupypi/templates *
-include README.md
-include CHANGELOG.txt

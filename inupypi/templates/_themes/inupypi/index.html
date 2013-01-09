@@ -1,0 +1,43 @@
+{% extends theme('base.html') %}
+{% block content %}
+{% if contents %}
+{% if contents.__parents__ %}
+<ul class="breadcrumb">
+</ul>
+{% endif %}
+<div>
+    <h4>{{ request.path }}</h4>
+    {% if request.path != '/' %}
+    <form action="{{ url_for('admin.upload') }}" class="form-inline" enctype="multipart/form-data" method="post">
+        <input id="file" name="file" type="file" style="display:none;" />
+        <input name="path" type="hidden" value="{{ request.path }}" />
+        <input class="btn" type="button" onclick="javascript:$('input[id=file]').click();" value="Browse" />
+        <input class="btn" type="submit" value="Upload" />
+    </form>
+    {% endif %}
+    <form action="{{ url_for('admin.create_folder') }}" class="form-inline" method="post">
+        <input id="folder_name" name="folder_name" placeholder="Name" type="text" />
+        <input class="btn" type="submit" onclick="javascript:create('{{ url_for('admin.create_folder') }}')" value="Create" />
+    </form>
+</div>
+
+<table class="table table-striped" id="pkg-table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th></th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for item in contents.__contents__ %}
+    <tr>
+        <td><a href="{{ item }}">{{ item }}</a></td>
+        <td>&nbsp;</td>
+        <td><button class="btn btn-small" onclick="javascript:remove('{{ url_for('admin.remove') }}', '{{ item }}')">Remove</button></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

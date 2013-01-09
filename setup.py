@@ -1,23 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-from setuptools import setup, find_packages
+import sys
 
-setup(name='inupypi',
-      version='0.2.6.3',
-      packages=find_packages(),
-      url="https://github.com/hallaj/inupypi",
-      long_description=open("README.md").read() + open("CHANGELOG.txt").read(),
-      maintainer='Muhammad Hallaj Subery',
-      maintainer_email='hallajs@gmail.com',
-      license="BSD",
-      description="A PyPiServer based on the Flask Framework and supports \
-multiple repositories.",
-      platforms='Linux, FreeBSD',
-      include_package_data=True,
-      zip_safe=False,
-      test_suite='tests',
-      install_requires=['Flask', 'Flask-Assets', 'argparse', 'cssmin',
-                        'pkgtools', 'unipath'],
-      scripts=['inupypi_server', 'inupypi_configure.py'],
-      package_data={'conf_samples': ['httpd-inupypi.conf.sample']})
+from setuptools import find_packages, setup
+from setuptools.command.test import test as TestCommand
+
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+
+        self.test_args = ['-sv', '--pyargs', self.test_suite]
+
+    def run_tests(self):
+        import pytest
+
+        errno = pytest.main(self.test_args)
+        sys.exit(errno)
+
+setup(
+    name='inupypi',
+    version='0.3.alpha1',
+    packages=find_packages(),
+    url='https://github.com/hallaj/inupypi',
+    maintainer='Muhammad Hallaj Subery',
+    maintainer_email='hallajs@gmail.com',
+    license='BSD',
+    description='A multiple repository PyPI server implementation',
+    platforms='FreeBSD, Linux',
+    test_suite='tests',
+    tests_require=['Flask-Testing', 'pytest'],
+    cmdclass={'test': PyTest},
+    install_requires=['Flask', 'Flask-Themes', 'unipath'])
