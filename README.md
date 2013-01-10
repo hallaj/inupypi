@@ -4,9 +4,9 @@
 
 ### Installation Instructions
 
-#### From source::
+#### From source:
 
-1. Clone the source code from the Github's repository::
+1. Clone the source code from the Github's repository:
 ```
   git clone https://github.com/hallaj/inupypi.git
 ```
@@ -35,10 +35,10 @@
 1. We wanted to have templates with our pypiserver so that formatting can be easily done.
 1. We had a few ideas where we wanted to bring our pypiserver that were not compatible or accepted by current pypiserver implementations.
 
-## TODO
+### TODO
 1. Create automated processes to generate all of the steps above to make the process less manual
 
-## Tests
+### Tests
   To run the tests
 ```sh
   python setup.py develop
