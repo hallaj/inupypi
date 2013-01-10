@@ -23,6 +23,7 @@ setup(
     name='inupypi',
     version='0.3.alpha1',
     packages=find_packages(),
+    include_package_data=True,
     url='https://github.com/hallaj/inupypi',
     maintainer='Muhammad Hallaj Subery',
     maintainer_email='hallajs@gmail.com',

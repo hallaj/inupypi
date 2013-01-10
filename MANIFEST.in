@@ -1,0 +1,2 @@
+graft inupypi/templates
+graft inupypi/static
