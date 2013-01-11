@@ -17,7 +17,12 @@ multiple repositories.",
       include_package_data=True,
       zip_safe=False,
       test_suite='tests',
+      entry_points={
+              'console_scripts': [
+                  'inupypi_server = main:main',
+              ]
+      },
       install_requires=['Flask', 'Flask-Assets', 'argparse', 'cssmin',
-                        'pkgtools', 'unipath'],
-      scripts=['inupypi_server', 'inupypi_configure.py'],
+                        'pkgtools', 'unipath', 'flask-command'],
+      scripts=['inupypi_configure.py'],
       package_data={'conf_samples': ['httpd-inupypi.conf.sample']})
