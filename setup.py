@@ -33,4 +33,5 @@ setup(
     test_suite='tests',
     tests_require=['Flask-Testing', 'pytest'],
     cmdclass={'test': PyTest},
-    install_requires=['Flask', 'Flask-Themes', 'unipath'])
+    entry_points={'console_scripts': ['inupypi_server = inupypi:main']},
+    install_requires=['Flask', 'Flask-Themes', 'argparse', 'unipath'])
