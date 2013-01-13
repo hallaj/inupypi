@@ -23,7 +23,7 @@ def create_app(**config):
     return app
 
 
-def main():
+def app():
     parser = ArgumentParser(description='inupypi Standalone Server')
     parser.add_argument('-d', '--DEBUG', action='store_true', default=False,
                         help='enable debug mode')
@@ -38,4 +38,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    app()
