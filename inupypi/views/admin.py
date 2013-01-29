@@ -17,14 +17,15 @@ def create_folder():
     folder = sanitize_path(request.form.get('folder_name', ''))
 
     if Path(path, folder):
-        base = Path(base, path).absolute()
-        create_path = Path(base, folder)
+        temp_base = Path(base, path).absolute()
+        create_path = Path(temp_base, folder)
 
         if create_path.exists():
             return redirect('%s' % Path(path, folder))
-        search = search_path(Path(path, folder), base)
+        search = search_path(folder, temp_base)
 
         if search:
+            base = Path(base).absolute()
             return redirect('%s' % sanitize_path(search.replace(base, '')))
 
         try:
