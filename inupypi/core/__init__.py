@@ -39,12 +39,18 @@ def content(request=None):
         if not repo.exists():
             if base == repo:
                 raise InuPyPIMissingRepoPath
-            raise InuPyPI404Exception
-        else:
-            if repo.isdir():
-                return Dirs(repo)
-            if repo.isfile():
-                return repo
+
+            # sets the request to lowercase and compares it with
+            # the existing items in the repository in lowercase
+            repo = search_path(repo, base)
+
+            if not repo:
+                raise InuPyPI404Exception
+
+        if repo.isdir():
+            return Dirs(repo)
+        if repo.isfile():
+            return repo
 
     except InuPyPIMissingRepoPath:
         abort(500, 'Missing repository or package path!')
@@ -57,3 +63,17 @@ def content(request=None):
 
 def sanitize_path(path):
     return path if not path.startswith('/') else path[1:]
+
+
+def search_path(path, repo):
+    try:
+        repo = Path(repo).absolute()
+        walk = list(repo.walk())
+
+        for item in walk:
+            if item.lower() == path.lower():
+                return item
+    except:
+        pass
+
+    return False

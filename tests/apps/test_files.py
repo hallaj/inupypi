@@ -26,15 +26,17 @@ class Test_Files(flask.ext.testing.TestCase):
         assert('Path or File could not be found!' in resp.data)
 
     def test_file_exists(self):
-        test_data = 'file content'
-        test_repo = self.temp.join('repo1').mkdir()
+        repo = 'repo1'
+        data = 'file content'
+
+        test_repo = self.temp.join(repo).mkdir()
         test_file = test_repo.join('file_a.txt')
-        test_file.write(test_data)
-        resp = self.client.get('/%s/%s' % (test_repo.basename,
+        test_file.write(data)
+        resp = self.client.get('/%s/%s' % (repo.upper(),
                                            test_file.basename),
                                follow_redirects=True)
 
         assert(200 == resp.status_code)
         assert(resp.headers.get('Content-Disposition'),
                'attachment; filename=%s' % test_file.basename)
-        assert(test_data, resp.data)
+        assert(data, resp.data)

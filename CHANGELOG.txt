@@ -1,3 +1,8 @@
+Version 0.3-alpha2
+- Introduced a new search_path method to cater for case-insensitive paths and appended tests for it.
+- Ensure inupypi_server binary file generated would would as it should.
+- Bump up all the package related files version numbers.
+
 Version 0.3-alpha1
 ==================
 - Major revamp in the code to reduce the loading time.

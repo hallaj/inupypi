@@ -21,7 +21,7 @@ class PyTest(TestCommand):
 
 setup(
     name='inupypi',
-    version='0.3.alpha1',
+    version='0.3.alpha2',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/hallaj/inupypi',
@@ -33,5 +33,5 @@ setup(
     test_suite='tests',
     tests_require=['Flask-Testing', 'pytest'],
     cmdclass={'test': PyTest},
-    entry_points={'console_scripts': ['inupypi_server = inupypi:main']},
+    entry_points={'console_scripts': ['inupypi_server = inupypi:app']},
     install_requires=['Flask', 'Flask-Themes', 'argparse', 'unipath'])
