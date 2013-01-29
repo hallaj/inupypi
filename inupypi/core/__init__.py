@@ -71,9 +71,8 @@ def search_path(path, repo):
         walk = list(repo.walk())
 
         for item in walk:
-            if item.lower() == path.lower():
+            if item.lower() == Path(repo, path).lower():
                 return item
     except:
         pass
-
     return False

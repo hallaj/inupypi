@@ -58,15 +58,16 @@ class Test_Repo(flask.ext.testing.TestCase):
         assert(main_repo.basename not in resp.data)
 
         resp = self.client.post('/admin/create_folder/',
-                                data={'folder_name': main_repo.basename},
+                                data={'path': '/',
+                                      'folder_name': main_repo.basename},
                                 follow_redirects=True)
 
         assert(200 == resp.status_code)
         assert(main_repo.check(dir=True))
 
         resp = self.client.post('/admin/create_folder/',
-                                data={'folder_name': '%s/%s' %
-                                      (main_repo.basename, sub_repo.basename)},
+                                data={'folder_name': '%s' % sub_repo.basename,
+                                      'path': main_repo.basename},
                                 follow_redirects=True)
 
         assert(200 == resp.status_code)
@@ -76,6 +77,26 @@ class Test_Repo(flask.ext.testing.TestCase):
 
         assert(200 == resp.status_code)
         assert(sub_repo.basename in resp.data)
+
+    def test_create_path_if_exists(self):
+        name = 'repo1'
+        name_upper = name.upper()
+        main_repo = self.temp.join(name)
+        main_repo_upper = self.temp.join(name_upper)
+        main_repo.mkdir()
+        resp = self.client.get('/')
+
+        assert resp.status_code == 200
+        assert main_repo.basename in resp.data
+        assert not main_repo_upper.check()
+
+        resp = self.client.post('/admin/create_folder/',
+                                data={'folder_name': '%s' %
+                                      main_repo.basename.upper()})
+
+        assert resp.status_code == 302
+        assert not main_repo_upper.check()
+        assert main_repo.basename in resp.headers.get('Location')
 
     def test_rename_path(self):
         repo = self.temp.join('repo1').mkdir()

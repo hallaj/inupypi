@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 
 from flask import Blueprint, abort, current_app, redirect, request, url_for
-from inupypi.core import sanitize_path
+from inupypi.core import sanitize_path, search_path
 from unipath import Path
 from werkzeug import secure_filename
 
@@ -13,11 +13,22 @@ admin = Blueprint('admin', __name__)
 def create_folder():
     base = Path(current_app.config.get('INUPYPI_REPO',
                 Path('.', 'packages')))
-    path = request.form.get('folder_name')
+    path = sanitize_path(request.form.get('path', ''))
+    folder = sanitize_path(request.form.get('folder_name', ''))
 
-    if path:
+    if Path(path, folder):
+        base = Path(base, path).absolute()
+        create_path = Path(base, folder)
+
+        if create_path.exists():
+            return redirect('%s' % Path(path, folder))
+        search = search_path(Path(path, folder), base)
+
+        if search:
+            return redirect('%s' % sanitize_path(search.replace(base, '')))
+
         try:
-            Path(base, path).mkdir(parents=True)
+            create_path.mkdir(parents=True)
         except Exception, e:
             status = 'Failed to create %s' % e
             abort(500, status)
@@ -48,7 +59,7 @@ def rename():
 def remove():
     base = Path(current_app.config.get('INUPYPI_REPO',
                 Path('.', 'packages')))
-    path = request.form.get('item_path')
+    path = sanitize_path(request.form.get('item_path'))
 
     if path:
         try:
