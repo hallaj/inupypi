@@ -10,23 +10,28 @@
 ```
   git clone https://github.com/hallaj/inupypi.git
 ```
+
 1. Building the application:
 ```
   python setup.py develop
 ```
+
 1. Running the application:
-  1. CLI:
+
+  ##### Standalone WSGI Server:
   ```
     inupypi_server -H <INSERT HOSTNAME> -p <INSERT PORT> -t <HTPASSWD FILE> <PATH TO REPOSITORY>
   ```
-  1. Apache mod_wsgi:
+
+  ##### Apache mod_wsgi:
+
     1. Create the following file and save it as inupypi.wsgi:
-    ```python
+    ```
       #!/usr/bin/env python
       # -*- coding: utf8 -*-
 
       from inupypi import create_app
-
+    
       config = {'INUPYPI_REPO': '/PATH/TO/REPOSITORY'}
       application = create_app(**config})
     ```
@@ -62,6 +67,7 @@
 
 ### Tests
 1. To run the tests:
+
 ```sh
   python setup.py test
 ```
