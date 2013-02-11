@@ -22,8 +22,8 @@ class Test_Files(flask.ext.testing.TestCase):
         resp = self.client.get('/%s' % test_file.basename,
                                follow_redirects=True)
 
-        assert(404 == resp.status_code)
-        assert('Path or File could not be found!' in resp.data)
+        assert resp.status_code == 404
+        assert 'Path or File could not be found!' in resp.data
 
     def test_file_exists(self):
         repo = 'repo1'
@@ -35,8 +35,8 @@ class Test_Files(flask.ext.testing.TestCase):
         resp = self.client.get('/%s/%s' % (repo.upper(),
                                            test_file.basename),
                                follow_redirects=True)
+        content = resp.headers.get('Content-Disposition')
 
-        assert(200 == resp.status_code)
-        assert(resp.headers.get('Content-Disposition'),
-               'attachment; filename=%s' % test_file.basename)
-        assert(data, resp.data)
+        assert resp.status_code == 200
+        assert content == 'attachment; filename=%s' % test_file.basename
+        assert data in resp.data

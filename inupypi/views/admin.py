@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 
 from flask import Blueprint, abort, current_app, redirect, request, url_for
+from flask.ext import htauth
 from inupypi.core import sanitize_path, search_path
 from unipath import Path
 from werkzeug import secure_filename
@@ -10,6 +11,7 @@ admin = Blueprint('admin', __name__)
 
 
 @admin.route('/admin/create_folder/', methods=['POST'])
+@htauth.authenticated
 def create_folder():
     base = Path(current_app.config.get('INUPYPI_REPO',
                 Path('.', 'packages')))
@@ -39,6 +41,7 @@ def create_folder():
 
 
 @admin.route('/admin/rename/', methods=['POST'])
+@htauth.authenticated
 def rename():
     base = Path(current_app.config.get('INUPYPI_REPO',
                 Path('.', 'packages')))
@@ -57,6 +60,7 @@ def rename():
 
 
 @admin.route('/admin/remove/', methods=['POST'])
+@htauth.authenticated
 def remove():
     base = Path(current_app.config.get('INUPYPI_REPO',
                 Path('.', 'packages')))
@@ -74,6 +78,7 @@ def remove():
 
 
 @admin.route('/admin/upload/', methods=['POST'])
+@htauth.authenticated
 def upload():
     base = Path(current_app.config.get('INUPYPI_REPO',
                 Path('.', 'packages')))

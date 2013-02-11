@@ -20,11 +20,11 @@ class Test_Basic(flask.ext.testing.TestCase):
     def test_index(self):
         resp = self.client.get('/')
 
-        assert(200 == resp.status_code)
-        assert('<table' in resp.data)
+        assert resp.status_code == 200
+        assert '<table' in resp.data
 
     def test_about(self):
         resp = self.client.get('/about/')
 
-        assert(200 == resp.status_code)
-        assert('About inupypi', resp.data)
+        assert resp.status_code == 200
+        assert 'About inupypi', resp.data

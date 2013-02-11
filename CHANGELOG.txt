@@ -1,3 +1,9 @@
+Version 0.3-alpha4
+==================
+- Added base authentication for administrative views.
+- Added a default htpasswd to go along with it - default user: admin, default pass: admin.
+- Fixing tests logic.
+
 Version 0.3-alpha3
 ==================
 - Ensure that if a directory exists on creation, it would redirect to the creation path.
