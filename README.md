@@ -31,7 +31,7 @@
       # -*- coding: utf8 -*-
 
       from inupypi import create_app
-    
+
       config = {'INUPYPI_REPO': '/PATH/TO/REPOSITORY'}
       application = create_app(**config})
     ```
@@ -46,13 +46,6 @@
           <Location />
               WSGIProcessGroup inupypi
               WSGIPassAuthorization On
-
-              AuthType Basic
-              AuthName "BAKUL Authentication"
-              AuthUserFile "/PATH/TO/htpasswd"
-              Require valid-user
-
-              Satisfy any
           </Location>
       </VirtualHost>
     ```

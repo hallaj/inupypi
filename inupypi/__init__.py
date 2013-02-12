@@ -37,8 +37,8 @@ def app():
                         help='Server Listen address')
     parser.add_argument('-p', '--PORT', default='8080',
                         help='Server Listen port')
-    parser.add_argument('-t', '--HTPASSWD', default=Path(__file__, '..',
-                                                         'htpasswd'),
+    parser.add_argument('-t', '--HTAUTH_HTPASSWD_PATH',
+                        default=Path(__file__, '..', 'htpasswd'),
                         help='htpasswd file for authentication.')
     parser.add_argument('INUPYPI-REPO', help='path to repository')
     args = vars(parser.parse_args())
