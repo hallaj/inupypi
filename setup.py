@@ -29,6 +29,7 @@ setup(
     maintainer_email='hallajs@gmail.com',
     license='BSD',
     description='A multiple repository PyPI server implementation',
+    long_description=open("README.rst").read(),
     platforms='FreeBSD, Linux',
     test_suite='tests',
     tests_require=['Flask-Testing', 'pytest'],
