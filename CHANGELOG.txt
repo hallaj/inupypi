@@ -1,5 +1,5 @@
-Version 0.3-beta1
-=================
+Version 0.3
+===========
 - moved the path of htpasswd.
 - ensure that the htpasswd entry would be read from absolute path.
 - fixing the path variable mismatch on CLI arguments.
