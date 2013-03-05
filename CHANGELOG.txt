@@ -1,3 +1,9 @@
+Version 0.3-beta1
+=================
+- moved the path of htpasswd.
+- ensure that the htpasswd entry would be read from absolute path.
+- fixing the path variable mismatch on CLI arguments.
+
 Version 0.3-alpha4
 ==================
 - Added base authentication for administrative views.

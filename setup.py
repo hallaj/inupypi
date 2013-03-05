@@ -21,7 +21,7 @@ class PyTest(TestCommand):
 
 setup(
     name='inupypi',
-    version='0.3.alpha4',
+    version='0.3-beta1',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/hallaj/inupypi',
