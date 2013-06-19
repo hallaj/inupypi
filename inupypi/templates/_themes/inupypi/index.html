@@ -6,7 +6,7 @@
 </ul>
 {% endif %}
 <div>
-    <h4>{{ request.path }}</h4>
+    <h4>{{ bread.links|join(" / ")|safe }}</h4>
     {% if request.path != '/' %}
     <p>&nbsp;</p>
     <form action="{{ url_for('admin.upload') }}" class="form-inline" enctype="multipart/form-data" method="post">
