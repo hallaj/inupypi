@@ -5,7 +5,7 @@ from flask import Blueprint, url_for, send_from_directory
 from inupypi.core import content
 from inupypi.views import render
 from unipath import Path
-from bread import Bread
+from inupypi.core.bread import Bread
 
 main = Blueprint('main', __name__)
 
