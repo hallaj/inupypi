@@ -19,7 +19,6 @@ class Dirs(object):
             self.__contents__ = sorted([dir_.absolute() for dir_ in path.listdir()
                                         if dir_.isdir() or dir_.isfile()],
                                        key=lambda v: parse_version(v))
-            import pdb;pdb.set_trace()
         except:
             pass
 
