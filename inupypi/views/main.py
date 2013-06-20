@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
-from flask import (Blueprint, current_app,
-                   url_for, send_from_directory)
+from flask import Blueprint, url_for, send_from_directory
 from inupypi.core import content
 from inupypi.views import render
 from unipath import Path
