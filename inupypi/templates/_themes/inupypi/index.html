@@ -38,7 +38,14 @@
 {% for item in contents.__contents__ %}
     <form action="{{ url_for('admin.remove') }}" class="form-inline" method="post">
     <tr>
-        <td><a href="{{ item }}">{{ item }}</a></td>
+        <td>{% if item.isdir() %}
+            <span style='font-weight:bold;'>
+                {%elif item.isfile() %}
+            <span>
+            {% endif %}
+            <a href="{{ item.name }}">{{ item.name }}</a>
+        </span>
+        </td>
         <td><input name="item_path" type="hidden" value="{{ request.path }}{{ item }}" /></td>
         <td><input class="btn btn-small" type="submit" value="Remove" /></td>
     </tr>
