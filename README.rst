@@ -18,7 +18,8 @@ Clone the source code from the Github's repository:
 
 ::
 
-Building the application:
+Building the application
+
 
 .. code-block :: python
 
@@ -26,7 +27,10 @@ Building the application:
 
 
 
-Running the application:
+Running the application
+-----------------------
+
+Inupypi can be run using the usual apache mod_wsgi setup as well as stand alone mode.
 
 As Standalone WSGI Server
 
@@ -40,7 +44,7 @@ As Standalone WSGI Server
 Apache mod_wsgi
 ~~~~~~~~~~~~~~~
 
-1. Create the following file and save it as inupypi.wsgi:
+1. To run using apache mod_wsgi, create the following file and save it as inupypi.wsgi:
 
 .. code-block :: python
 
@@ -54,7 +58,7 @@ Apache mod_wsgi
 
 
 
-2. Add the following Apache configuration to use the wsgi file:
+2. Add the following Apache configuration to use the above defined wsgi file:
 
 
 .. code-block:: bash
