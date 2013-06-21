@@ -16,7 +16,8 @@ class Dirs(object):
             path = Path(path)
 
             self.__parents__ = path
-            self.__contents__ = sorted([dir_.name for dir_ in path.listdir()
+            self.__contents__ = sorted([dir_.absolute() for dir_ in
+                                        path.listdir()
                                         if dir_.isdir() or dir_.isfile()],
                                        key=lambda v: parse_version(v))
         except:
