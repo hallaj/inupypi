@@ -82,13 +82,15 @@ FAQ: Why another pypiserver application ?
 -----------------------------------------
 
 1. We could not find another pypiserver that supported multiple repositories.
-2. We wanted to have templates with our pypi server so that formatting can be easily done. 
-3. We had a few ideas where we wanted to bring our pypi server that were not compatible or accepted by one of the pypi server implementations.
+
+#. We wanted to have templates with our pypi server so that formatting can be easily done. 
+
+#. We had a few ideas where we wanted to bring our pypi server that were not compatible or accepted by one of the pypi server implementations.
 
 TODO
 ----
 1. Create automated processes to generate all of the steps above to make the process less manual.
-2. Auto resolving and updating of package versions.
+#. Auto resolving and updating of package versions.
 
 Tests
 ---------
