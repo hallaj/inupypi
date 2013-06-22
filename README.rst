@@ -1,8 +1,12 @@
+.. -*- mode: rst; coding: utf-8 -*-
+
+===============================================================================================
+A Multi Repository PyPI Server Implemented in Python Flask
+===============================================================================================
+
 .. image:: https://travis-ci.org/hallaj/inupypi.png
 
 
-A Multi Repository PyPI Server Implementation in Python Flask
-=============================================================
 
 Installation Instructions
 -------------------------
@@ -10,18 +14,16 @@ Installation Instructions
 From source
 ~~~~~~~~~~~
 
-Clone the source code from the Github's repository:
+Clone the source code from the Github's repository::
 
-::
+
 
   git clone https://github.com/hallaj/inupypi.git
 
-::
-
-Building the application
 
 
-.. code-block :: python
+Building the application::
+
 
   python setup.py develop
 
@@ -32,10 +34,8 @@ Running the application
 
 Inupypi can be run using the usual apache mod_wsgi setup as well as stand alone mode.
 
-As Standalone WSGI Server
+As Standalone WSGI Server::
 
-  
-.. code-block :: bash
 
     inupypi_server -H <INSERT HOSTNAME> -p <INSERT PORT> -t <HTPASSWD FILE> <PATH TO REPOSITORY>
 
@@ -44,9 +44,8 @@ As Standalone WSGI Server
 Apache mod_wsgi
 ~~~~~~~~~~~~~~~
 
-1. To run using apache mod_wsgi, create the following file and save it as inupypi.wsgi:
+1. To run using apache mod_wsgi, create the following file and save it as inupypi.wsgi::
 
-.. code-block :: python
 
       #!/usr/bin/env python
       # -*- coding: utf8 -*-
@@ -58,10 +57,8 @@ Apache mod_wsgi
 
 
 
-2. Add the following Apache configuration to use the above defined wsgi file:
+2. Add the following Apache configuration to use the above defined wsgi file::
 
-
-.. code-block:: bash
 
       <VirtualHost *:80>
           ServerName      SERVER_NAME
@@ -95,9 +92,8 @@ TODO
 Tests
 ---------
 
-To run the tests:
+To run the tests::
 
-.. code-block:: python
 
   sh
     python setup.py test
