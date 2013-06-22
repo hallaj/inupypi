@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 import sys
 
@@ -21,7 +21,7 @@ class PyTest(TestCommand):
 
 setup(
     name='inupypi',
-    version='0.3.2',
+    version='0.3.3',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/hallaj/inupypi',
