@@ -3,6 +3,7 @@ include MANIFEST.in
 include README.rst
 include inupypi/__init__.py
 include inupypi/core/__init__.py
+include inupypi/core/bread.py
 include inupypi/core/exceptions.py
 include inupypi/core/info.py
 include inupypi/htpasswd
