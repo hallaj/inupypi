@@ -22,6 +22,7 @@ class Test_Basic(flask.ext.testing.TestCase):
 
         assert resp.status_code == 200
         assert '<table' in resp.data
+        assert inupypi.__version__ in resp.data
 
     def test_about(self):
         resp = self.client.get('/about/')

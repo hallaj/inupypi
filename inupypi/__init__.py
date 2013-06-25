@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
+__version__ = '0.3.3'
+
+
 from argparse import ArgumentParser
 from flask import Flask
 from flask.ext import htauth
@@ -17,6 +20,7 @@ def create_app(**config):
                                               'htpasswd').absolute()
     app.config['HTAUTH_REALM'] = 'inupypi Authentication'
     app.config['THEME'] = app.config.get('THEME', 'inupypi')
+    app.config['VERSION'] = __version__
 
     setup_themes(app)
     htauth.HTAuth(app)
@@ -30,7 +34,8 @@ def create_app(**config):
 
 
 def app():
-    parser = ArgumentParser(description='inupypi Standalone Server')
+    parser = ArgumentParser(description='inupypi Standalone Server',
+                            version=__version__)
     parser.add_argument('-d', '--DEBUG', action='store_true', default=False,
                         help='enable debug mode')
     parser.add_argument('-H', '--HOST', default='127.0.0.1',
