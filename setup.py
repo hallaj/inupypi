@@ -3,7 +3,6 @@
 
 import sys
 
-from inupypi import __version__
 from setuptools import find_packages, setup
 from setuptools.command.test import test as TestCommand
 
@@ -38,4 +37,4 @@ setup(cmdclass={'test': PyTest},
       test_suite='tests',
       tests_require=['Flask-Testing', 'pytest'],
       url='https://github.com/hallaj/inupypi',
-      version=__version__)
+      version='0.3.3')

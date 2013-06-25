@@ -3,7 +3,6 @@
 
 __version__ = '0.3.3'
 
-
 from argparse import ArgumentParser
 from flask import Flask
 from flask.ext import htauth
