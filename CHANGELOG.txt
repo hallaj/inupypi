@@ -1,3 +1,7 @@
+Version 0.3.4
+=============
+- UI Changes: Added Text to show more of 'Create' button functionality. Issue #37
+
 Version 0.3
 ===========
 - moved the path of htpasswd.
