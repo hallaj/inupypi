@@ -103,3 +103,9 @@ To run the tests:
     python setup.py test
 
 
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/hallaj/inupypi/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
