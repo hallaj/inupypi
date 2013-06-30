@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-__version__ = '0.3.3'
 
+from inupypi.version import version as __version__
 from argparse import ArgumentParser
 from flask import Flask
 from flask.ext import htauth
