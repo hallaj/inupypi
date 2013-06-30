@@ -1,14 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import sys
 
 from setuptools import find_packages, setup
 from setuptools.command.test import test as TestCommand
 
-
+VERSION = '0.3.3'
 requirements = ['Flask', 'Flask-Themes', 'Flask-HTAuth', 'argparse', 'unipath']
 
+def write_version_py(filename=None):
+    cnt = """\
+version = '%s'
+"""
+    if not filename:
+        filename = os.path.join(
+            os.path.dirname(__file__), 'inupypi', 'version.py')
+
+    a = open(filename, 'w')
+    try:
+        a.write(cnt % (VERSION))
+    finally:
+        a.close()
 
 class PyTest(TestCommand):
     def finalize_options(self):
@@ -21,6 +35,8 @@ class PyTest(TestCommand):
 
         errno = pytest.main(self.test_args)
         sys.exit(errno)
+
+write_version_py()
 
 setup(cmdclass={'test': PyTest},
       description='A multiple repository PyPI server implementation',
