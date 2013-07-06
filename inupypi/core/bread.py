@@ -13,11 +13,10 @@ class Bread(object):
     Create Bread object
     ----------------------------------------
     >>> from bread import Bread
-    >>> bread = Bread(
-    "http://www.foxhop.net/samsung/HL-T5087SA/red-LED-failure")
-    >>> print bread.crumbs
-    >>> print bread.links
-
+    >>> uri = "http://www.foxhop.net/samsung/HL-T5087SA/red-LED-failure"
+    >>> bread = Bread(uri)
+    >>> print(bread.crumbs)
+    >>> print(bread.links)
     """
     def __init__(self, uri=None):
         if uri:
@@ -54,27 +53,3 @@ class Bread(object):
                 '<a href="' + crumb_uri + '" class="breadcrumbs">'
                 + crumb + '</a>')
         return links
-
-if __name__ == "__main__":
-    print '\n'
-    bread = Bread(
-        "http://www.foxhop.net/samsung/HL-T5087SA/red-LED-failure")
-    print bread.uri
-    print bread.crumbs
-    print bread.links
-    print '\n'
-    bread.uri = 'https://encrypted.google.com/search?q=foxhop'
-    print bread.uri
-    print bread.crumbs
-    print bread.links
-    print '\n'
-    bread = Bread()
-    bread.uri = 'russell.ballestrini.net'
-    print bread.uri
-    print bread.crumbs
-    print bread.links
-    print '\n'
-    bread = Bread('ftp://ftp.computalynx.net/pub/Alpha')
-    print bread.uri
-    print bread.crumbs
-    print bread.links
