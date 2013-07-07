@@ -34,10 +34,10 @@ Inupypi can be run using the usual apache mod_wsgi setup as well as stand alone 
 
 As Standalone WSGI Server
 
-  
+
 .. code-block :: bash
 
-    inupypi_server -H <INSERT HOSTNAME> -p <INSERT PORT> -t <HTPASSWD FILE> <PATH TO REPOSITORY>
+    python inupypi -H <INSERT HOSTNAME> -p <INSERT PORT> -t <HTPASSWD FILE> <PATH TO REPOSITORY>
 
 
 
@@ -51,7 +51,7 @@ Apache mod_wsgi
       #!/usr/bin/env python
       # -*- coding: utf8 -*-
 
-      from inupypi import create_app
+      from inupypi.__main__ import create_app
 
       config = {'INUPYPI_REPO': '/PATH/TO/REPOSITORY'}
       application = create_app(**config})
@@ -74,7 +74,7 @@ Apache mod_wsgi
               WSGIPassAuthorization On
           </Location>
       </VirtualHost>
-      
+
 
 
 
@@ -83,7 +83,7 @@ FAQ: Why another pypiserver application ?
 
 1. We could not find another pypiserver that supported multiple repositories.
 
-#. We wanted to have templates with our pypi server so that formatting can be easily done. 
+#. We wanted to have templates with our pypi server so that formatting can be easily done.
 
 #. We had a few ideas where we wanted to bring our pypi server that were not compatible or accepted by one of the pypi server implementations.
 

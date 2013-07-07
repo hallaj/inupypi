@@ -3,9 +3,9 @@
 
 import base64
 import flask.ext.testing
-import inupypi
 import pytest
 
+from inupypi.__main__ import create_app
 from StringIO import StringIO
 
 
@@ -21,7 +21,7 @@ class Test_Repo(flask.ext.testing.TestCase):
         self.htpasswd.write(passwd)
 
     def create_app(self):
-        app = inupypi.create_app()
+        app = create_app()
         app.config['TESTING'] = True
         app.config['INUPYPI_REPO'] = str(self.repo)
         app.config['HTAUTH_HTPASSWD_PATH'] = str(self.htpasswd)

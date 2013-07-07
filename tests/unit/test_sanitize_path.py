@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-import inupypi
+from inupypi.core import sanitize_path
 
 
 def test_sanitize_path():
-    assert(inupypi.core.sanitize_path('/tmp') == 'tmp')
+    assert sanitize_path('/tmp') == 'tmp'

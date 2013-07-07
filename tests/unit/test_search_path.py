@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-import inupypi
+from inupypi.core import search_path
 
 
 def test_search_path(tmpdir):
@@ -11,5 +11,4 @@ def test_search_path(tmpdir):
         d = tmpdir.join(d)
         d.mkdir()
 
-        assert inupypi.core.search_path(d.strpath.upper(),
-                                        tmpdir.strpath) == d.strpath
+        assert search_path(d.strpath.upper(), tmpdir.strpath) == d.strpath

@@ -2,8 +2,9 @@
 # -*- coding: utf8 -*-
 
 import flask.ext.testing
-import inupypi
 import pytest
+
+from inupypi.__main__ import create_app
 
 
 class Test_Files(flask.ext.testing.TestCase):
@@ -12,7 +13,7 @@ class Test_Files(flask.ext.testing.TestCase):
         self.temp = tmpdir
 
     def create_app(self):
-        app = inupypi.create_app()
+        app = create_app()
         app.config['TESTING'] = True
         app.config['INUPYPI_REPO'] = str(self.temp)
         return app
