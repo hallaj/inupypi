@@ -1,4 +1,5 @@
-.. image:: https://travis-ci.org/hallaj/inupypi.png
+.. image:: https://travis-ci.org/hallaj/inupypi.png 
+.. image:: https://coveralls.io/repos/hallaj/inupypi/badge.png?branch=master :target: https://coveralls.io/r/hallaj/inupypi?branch=master 
 
 
 A Multi Repository PyPI Server Implementation in Python Flask
