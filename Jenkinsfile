@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        build 'inupypi'
+        sh 'nosetests -sv tests'
       }
     }
   }
