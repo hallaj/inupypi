@@ -1,9 +1,9 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    stage('') {
+    stage('Build') {
       steps {
-        sh 'pytest -sv tests'
+        build 'inupypi'
       }
     }
   }
